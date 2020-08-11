@@ -2,7 +2,7 @@
 import GenericInstruments: query
 
 function connect!(address, mode=GI.VI_NO_LOCK, timeout=GI.VI_TMO_IMMEDIATE)
-		# resource maager
+		# resource manager
 		rmg = GI.viOpenDefaultRM()
 		#Pointer for the instrument handle
 		vi = ViPSession(0)
