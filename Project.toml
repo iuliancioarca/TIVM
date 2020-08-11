@@ -1,3 +1,8 @@
+name = "TIVM"
+uuid = "b8d23480-b8ee-42fe-a617-db155b4b1a29"
+authors = ["iuliancioarca"]
+version = "0.1.0"
+
 [deps]
 CImGui = "5d785b6c-b76f-510e-a07c-3070796c7e87"
 Debugger = "31a5f54b-26ea-5ae9-a837-f05ce5417438"
