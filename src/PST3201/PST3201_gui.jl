@@ -1,5 +1,5 @@
 
-function main_gui()
+function main_pst3201_gui()
     if !@isdefined psu
         @error "Obj not found or has wrong name! Please rename obj to: psu , and ensure communication is opened!"
         return nothing

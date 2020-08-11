@@ -1,5 +1,5 @@
 
-function main_gui()
+function main_gdm8246_gui()
     if !@isdefined dmm
         @error "Obj not found or has wrong name! Please rename obj to: dmm , and ensure communication is opened!"
         return nothing
