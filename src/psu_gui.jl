@@ -83,7 +83,7 @@ function ShowPSUWindow(psu, psu_conf, rev_state_dict, refresh_cnt)
 	# Draw REFRESH
 	CImGui.SameLine()
 	psu_conf.refresh_btn, pressed = draw_toggle_button(psu_conf.refresh_btn)			
-	update_psu_conf!(psu_conf, psu, refresh_cnt)
+	psu_conf.refresh_btn.state && @async update_psu_conf!(psu_conf, psu, refresh_cnt)
 	
 	# Draw INPUT BOX
 	@c CImGui.InputDouble("", &psu_conf.crt_value, 0.01, 1.0, "%.4f")

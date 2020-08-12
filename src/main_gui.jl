@@ -16,7 +16,7 @@ function start_gui(psu)
         clear_color = Cfloat[0.45, 0.55, 0.60, 1.00]
 		fps = 200
 		refresh_cnt = 0
-		refresh_cnt_max = 210
+		refresh_cnt_max = 110
 		rev_state_dict = Dict("on"=>"off", "off"=>"on")
 		# instantiate instr objects
 		psu_conf = PST3201Conf()

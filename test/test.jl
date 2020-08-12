@@ -11,7 +11,7 @@ catch
 end
 
 # start GUI
-schedule(@task TIVM.start_gui(psu))
+@async TIVM.start_gui(psu)
 
 # disconnect
 #disconnect!(psu)
