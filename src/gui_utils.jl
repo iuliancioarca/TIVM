@@ -61,32 +61,24 @@ function init_gui()
 end
 
 
-#function ShowMenuWindow(show_psu, show_dmm, show_fgen, show_scope)
-#	CImGui.Begin("Menu")
-#		@c CImGui.Checkbox("psu", &show_psu)
-#		CImGui.SameLine(), @c CImGui.Checkbox("dmm", &show_dmm)
-#		CImGui.SameLine(), @c CImGui.Checkbox("fgen", &show_fgen)
-#		CImGui.SameLine(), @c CImGui.Checkbox("scope", &show_scope)
-#	CImGui.End()
-#	return show_psu, show_dmm, show_fgen, show_scope
-#end
-
-
-function ShowMenuWindow(x)
+function ShowMenuWindow(psu_conf, dmm_conf, fgen_conf)
 	CImGui.Begin("Menu")
-		@c CImGui.Checkbox("psu", &x.active)
+		@c CImGui.Checkbox("psu", &psu_conf.active)
+		CImGui.SameLine(), @c CImGui.Checkbox("dmm", &dmm_conf.active)
+		CImGui.SameLine(), @c CImGui.Checkbox("fgen", &fgen_conf.active)
+		#ImGui.SameLine(), @c CImGui.Checkbox("scope", &scope_conf.active)
 	CImGui.End()
-	return x
+	#return psu_conf, dmm_conf, fgen_conf, scope_conf
+	return psu_conf, dmm_conf, fgen_conf
 end
 
 
-function draw_psu_info(args...)
-	CImGui.Text(args[1])
-	for arg in args[2:end]
-		CImGui.SameLine(), CImGui.Text(arg)
-	end
-	return nothing
-end
+#function ShowMenuWindow(psu_conf)
+#	CImGui.Begin("Menu")
+#		@c CImGui.Checkbox("psu", &psu_conf.active)
+#	CImGui.End()
+#	return psu_conf
+#end
 
 function draw_toggle_button(button)
 	# hack for toggle button
@@ -109,3 +101,20 @@ function draw_toggle_button(button)
 	return button, pressed
 end
 
+# PSU
+function draw_psu_info(args...)
+	CImGui.Text(args[1])
+	for arg in args[2:end]
+		CImGui.SameLine(), CImGui.Text(arg)
+	end
+	return nothing
+end
+
+# DMM
+function draw_dmm_info(args...)
+	CImGui.Text(args[1])
+	for arg in args[2:end]
+		CImGui.SameLine(), CImGui.Text(arg)
+	end
+	return nothing
+end

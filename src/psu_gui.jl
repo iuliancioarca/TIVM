@@ -1,6 +1,6 @@
 function ShowPSUWindow(psu, psu_conf, rev_state_dict, refresh_cnt)
 	CImGui.Begin("PST3201 Power supply")
-	# DRAW DISPLA INFO
+	# DRAW DISPLAY INFO
 	draw_psu_info("CH1", " ", psu_conf.C1.volt_meas, "V",
 					psu_conf.C1.curr_meas, "A")
 	draw_psu_info("CH2", " ", psu_conf.C2.volt_meas, "V",

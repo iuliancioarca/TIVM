@@ -9,7 +9,7 @@ using CImGui.GLFWBackend.GLFW
 using CImGui.OpenGLBackend.ModernGL
 
 
-function start_gui(psu)
+function start_gui(psu_handle, dmm_handle, fgen_handle)
 	window, ctx = init_gui()
     # Main while loop
     try
@@ -19,7 +19,14 @@ function start_gui(psu)
 		refresh_cnt_max = 110
 		rev_state_dict = Dict("on"=>"off", "off"=>"on")
 		# instantiate instr objects
+		psu = PST3201(psu_handle)
+		dmm = GDM8246(dmm_handle)
+		fgen = GFG3015(fgen_handle)
+		# instantiate gui conf objects
 		psu_conf = PST3201Conf()
+		dmm_conf = GDM8246Conf()
+		fgen_conf = GFG3015Conf()
+		#scope_conf = SCOPEConf()
         while !GLFW.WindowShouldClose(window)
 			refresh_cnt == refresh_cnt_max && (refresh_cnt=0)
 			refresh_cnt = refresh_cnt + 1
@@ -31,16 +38,12 @@ function start_gui(psu)
 			CImGui.NewFrame()
 			
 			# Display checkboxes for activating instrument front panels
-			#show_psu, show_dmm, show_fgen, show_scope = 
-			#		ShowMenuWindow(show_psu, show_dmm, show_fgen, show_scope)
-					
-			psu_conf = ShowMenuWindow(psu_conf)
+			psu_conf, dmm_conf, fgen_conf = ShowMenuWindow(psu_conf, dmm_conf, fgen_conf)				
 					
 			# DISPLAY INSTRUMENTS FRONT PANELS
 			psu_conf.active && (psu_conf = ShowPSUWindow(psu, psu_conf, rev_state_dict, refresh_cnt))
-			#show_dmm && ShowDMMWindow(&show_dmm)
-			#show_fgen && ShowFGENWindow(&show_fgen)
-			#show_scope && ShowSCOPEWindow(&show_scope)
+			dmm_conf.active && (dmm_conf = ShowDMMWindow(dmm, dmm_conf, rev_state_dict, refresh_cnt))
+			fgen_conf.active && (fgen_conf = ShowFGENWindow(fgen, fgen_conf, rev_state_dict, refresh_cnt))
 			
 			# RENDER GUI
 			render_gui(window, clear_color; fps=fps)

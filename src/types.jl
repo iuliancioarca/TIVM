@@ -54,3 +54,43 @@ PST3201Conf() = PST3201Conf(false,
 					)
 
 
+# DMM
+mutable struct GDM8246Conf
+	active
+	primary
+	secondary
+	range
+	crt_chan
+    crt_func
+    crt_value
+	shift_btn
+	auto_btn
+	refresh_btn
+end
+# Outer constructor
+GDM8246Conf() = GDM8246Conf(false, "000.000", "----.---", "na", "C1", "na", 0.0,
+					CImGuiToggleButton(" SHIFT "),
+					CImGuiToggleButton("  AUTO  "),
+					CImGuiToggleButton("REFRESH")
+					)
+
+# FGEN
+mutable struct GFG3015Conf
+	active
+	idx_sel
+	crt_chan
+    crt_func
+    crt_value
+	amplit_unit
+	freq
+	amplit
+	offs
+	duty
+	shift_btn
+	refresh_btn
+end
+# Outer constructor
+GFG3015Conf() = GFG3015Conf(false, "1", "C1", "na", 0.0, "Vpp", "na","na","na","na",
+					CImGuiToggleButton(" SHIFT "),
+					CImGuiToggleButton("REFRESH")
+					)
