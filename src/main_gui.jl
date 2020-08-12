@@ -8,18 +8,15 @@ using CImGui.OpenGLBackend
 using CImGui.GLFWBackend.GLFW
 using CImGui.OpenGLBackend.ModernGL
 
-include("types.jl")
-include("gui_utils.jl")
-include("psu_gui.jl")
 
-function start_gui()
+function start_gui(psu)
 	window, ctx = init_gui()
     # Main while loop
     try
         clear_color = Cfloat[0.45, 0.55, 0.60, 1.00]
 		fps = 200
 		refresh_cnt = 0
-		refresh_cnt_max = 110
+		refresh_cnt_max = 210
 		rev_state_dict = Dict("on"=>"off", "off"=>"on")
 		# instantiate instr objects
 		psu_conf = PST3201Conf()
@@ -40,7 +37,7 @@ function start_gui()
 			psu_conf = ShowMenuWindow(psu_conf)
 					
 			# DISPLAY INSTRUMENTS FRONT PANELS
-			psu_conf.active && (psu_conf = ShowPSUWindow(psu_conf, rev_state_dict))
+			psu_conf.active && (psu_conf = ShowPSUWindow(psu, psu_conf, rev_state_dict, refresh_cnt))
 			#show_dmm && ShowDMMWindow(&show_dmm)
 			#show_fgen && ShowFGENWindow(&show_fgen)
 			#show_scope && ShowSCOPEWindow(&show_scope)

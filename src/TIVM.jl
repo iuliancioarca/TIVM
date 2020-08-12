@@ -14,21 +14,29 @@ using Statistics
 
 const GI = GenericInstruments
 
-# visa goodies
+# check psu variable
+try
+	psu = Main.psu
+catch
+	@warn "please connect psu first"
+end
+
+# VISA 
 include("visa_utils.jl")
+
+# TYPES
+include("types.jl")
+
+# PST3201
+include("PST3201_driver.jl")
+include("PST3201_utils.jl")
+
+# GUI
+include("gui_utils.jl")
+include("psu_gui.jl")
+
 include("main_gui.jl")
 
-# PSU
-#include("PST3201/PST3201_driver.jl")
-#include("PST3201/PST3201_utils.jl")
-#include("PST3201/PST3201_types.jl")
-#include("PST3201/PST3201_gui.jl")
-
-# PSU
-#include("GDM8246/GDM8246_driver.jl")
-#include("GDM8246/GDM8246_utils.jl")
-#include("GDM8246/GDM8246_types.jl")
-#include("GDM8246/GDM8246_gui.jl")
 
 
 export connect!, disconnect!, write, read, query

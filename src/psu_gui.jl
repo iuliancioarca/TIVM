@@ -1,4 +1,4 @@
-function ShowPSUWindow(psu_conf, rev_state_dict)
+function ShowPSUWindow(psu, psu_conf, rev_state_dict, refresh_cnt)
 	CImGui.Begin("PST3201 Power supply")
 	# DRAW DISPLA INFO
 	draw_psu_info("CH1", " ", psu_conf.C1.volt_meas, "V",
@@ -64,6 +64,7 @@ function ShowPSUWindow(psu_conf, rev_state_dict)
 	CImGui.SameLine()
 	psu_conf.output_btn, pressed = draw_toggle_button(psu_conf.output_btn)
 	pressed && set_outp(psu, psu_conf.crt_chan, rev_state_dict[psu_conf.output_state])
+
 	
 	# Draw ENTER
 	CImGui.SameLine()
@@ -82,7 +83,7 @@ function ShowPSUWindow(psu_conf, rev_state_dict)
 	# Draw REFRESH
 	CImGui.SameLine()
 	psu_conf.refresh_btn, pressed = draw_toggle_button(psu_conf.refresh_btn)			
-	pressed && update_psu_conf!(psu_conf, psu, refresh_cnt)
+	update_psu_conf!(psu_conf, psu, refresh_cnt)
 	
 	# Draw INPUT BOX
 	@c CImGui.InputDouble("", &psu_conf.crt_value, 0.01, 1.0, "%.4f")

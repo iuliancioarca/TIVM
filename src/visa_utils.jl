@@ -6,7 +6,7 @@ function connect!(address, mode=GI.VI_NO_LOCK, timeout=GI.VI_TMO_IMMEDIATE)
 		rmg = GI.viOpenDefaultRM()
 		#Pointer for the instrument handle
 		vi = GI.ViPSession(0)
-		check_status(GI.viOpen(rmg, address, mode, timeout, vi))
+		GI.check_status(GI.viOpen(rmg, address, mode, timeout, vi))
 		handle = vi.x
 end
 
