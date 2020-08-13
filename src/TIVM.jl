@@ -9,8 +9,6 @@ using CImGui.GLFWBackend
 using CImGui.OpenGLBackend
 using CImGui.GLFWBackend.GLFW
 using CImGui.OpenGLBackend.ModernGL
-using Random
-using Statistics
 
 const GI = GenericInstruments
 
