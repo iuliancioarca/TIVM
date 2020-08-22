@@ -1,16 +1,16 @@
 
 function update_fgen_conf!(fgen_conf, fgen::GFG3015, refresh_cnt)
-    base = 10
+    base = 4
     (refresh_cnt==base*1) && (fgen_conf.crt_func = get_wfm(fgen, fgen_conf.crt_chan))
 	
 	# this is the most frequent source of timeouts
-    #(refresh_cnt==base*2) && (fgen_conf.amplit_unit = get_amplit_unit(fgen, fgen_conf.crt_chan))
+	(refresh_cnt==base*3) && (fgen_conf.amplit_unit = get_amplit_unit(fgen, fgen_conf.crt_chan))
 
-	(refresh_cnt==base*4) && (fgen_conf.freq = get_freq(fgen, fgen_conf.crt_chan))
-	(refresh_cnt==base*5) && (fgen_conf.amplit = get_amplit(fgen, fgen_conf.crt_chan))
-	(refresh_cnt==base*6) && (fgen_conf.offs = get_offs(fgen, fgen_conf.crt_chan))
+	(refresh_cnt==base*6) && (fgen_conf.freq = get_freq(fgen, fgen_conf.crt_chan))
+	(refresh_cnt==base*9) && (fgen_conf.amplit = get_amplit(fgen, fgen_conf.crt_chan))
+	(refresh_cnt==base*12) && (fgen_conf.offs = get_offs(fgen, fgen_conf.crt_chan))
 	
-    (refresh_cnt==base*7) && (fgen_conf.duty = get_duty(fgen, fgen_conf.crt_chan))
+    (refresh_cnt==base*15) && (fgen_conf.duty = get_duty(fgen, fgen_conf.crt_chan))
     return nothing
 end
 

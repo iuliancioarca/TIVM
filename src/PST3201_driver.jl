@@ -44,7 +44,7 @@ function set_source_lev(obj::PST3201, ch, lev)
 end
 function get_source_lev(obj::PST3201, ch)
     ch = obj.instr_dict[ch]
-    cmd = ":CHAN$ch:VOLT ?"
+    cmd = ":CHAN$ch:VOLT?"
     value = strip(query(obj.handle, cmd))
 end
 		
@@ -56,7 +56,7 @@ function set_volt_protection(obj::PST3201, ch, lev)
 end
 function get_volt_protection(obj::PST3201, ch)
     ch = obj.instr_dict[ch]
-    cmd = ":CHAN$ch:PROT:VOLT ?"
+    cmd = ":CHAN$ch:PROT:VOLT?"
     value = strip(query(obj.handle, cmd))
 end
 function set_curr_protection(obj::PST3201, ch, state)
@@ -67,7 +67,7 @@ function set_curr_protection(obj::PST3201, ch, state)
 end
 function get_curr_protection(obj::PST3201, ch)
     ch = obj.instr_dict[ch]
-    cmd = ":CHAN$ch:PROT:CURR ?"
+    cmd = ":CHAN$ch:PROT:CURR?"
     value = strip(query(obj.handle, cmd))
     value = obj.instr_dict[value]
 end
@@ -78,7 +78,7 @@ function set_max_curr(obj::PST3201, ch, lev)
 end
 function get_max_curr(obj::PST3201, ch)
     ch = obj.instr_dict[ch]
-    cmd = ":CHAN$ch:CURR ?"
+    cmd = ":CHAN$ch:CURR?"
     value = strip(query(obj.handle, cmd))
 end
 function reset_protections(obj::PST3201)
@@ -90,7 +90,7 @@ end
 function get_meas(obj::PST3201, ch, fct)
     ch = obj.instr_dict[ch]
     fct = obj.instr_dict[fct]
-    cmd = ":CHAN$ch:MEAS:$fct ?"
+    cmd = ":CHAN$ch:MEAS:$fct?"
     value = strip(query(obj.handle, cmd))
 end
         
@@ -103,7 +103,7 @@ function set_outp(obj::PST3201, ch, state)
 end
 function get_outp(obj::PST3201, ch)
     ch = obj.instr_dict[ch]
-    cmd = ":OUTPut:STATe ?"
+    cmd = ":OUTPut:STATe?"
     value = strip(query(obj.handle, cmd))
     value = obj.instr_dict[value]
 end        

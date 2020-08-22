@@ -69,7 +69,7 @@ function set_sense_range(obj::GDM8246, ch, vrang) # this will not work
 end	
 function get_sense_range(obj::GDM8246, ch)
 	ch = obj.instr_dict[ch]
-	cmd = ":CONFigure:RANGE ?"
+	cmd = ":CONFigure:RANGE?"
 	strip(query(obj.handle, cmd))
 end		
 function set_sense_range_auto(obj::GDM8246, ch, st)

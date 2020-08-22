@@ -9,20 +9,11 @@ using CImGui.GLFWBackend
 using CImGui.OpenGLBackend
 using CImGui.GLFWBackend.GLFW
 using CImGui.OpenGLBackend.ModernGL
-using Random
-using Statistics
+using Printf 
+using ImPlot
+import CImGui.LibCImGui: ImGuiCond_Always, ImGuiCond_Once
 
 const GI = GenericInstruments
-
-# check psu variable
-try
-	psu = Main.psu
-	dmm = Main.dmm
-	fgen = Main.fgen
-	scope = Main.scope
-catch
-	@warn "please connect psu/dmm/fgen/scope first"
-end
 
 # VISA 
 include("visa_utils.jl")
@@ -42,12 +33,15 @@ include("GDM8246_utils.jl")
 include("GFG3015_driver.jl")
 include("GFG3015_utils.jl")
 
+# TDS2002B
+include("TDS2002B_driver.jl")
+include("TDS2002B_utils.jl")
 # GUI
 include("gui_utils.jl")
 include("psu_gui.jl")
 include("dmm_gui.jl")
 include("fgen_gui.jl")
-
+include("scope_gui.jl")
 include("main_gui.jl")
 
 

@@ -40,7 +40,7 @@ function init_gui()
     GLFW.SetErrorCallback(error_callback)
 
     # create window
-    window = GLFW.CreateWindow(600, 600, "Lab Instruments")
+    window = GLFW.CreateWindow(1000, 600, "Lab Instruments")
     @assert window != C_NULL
     
     GLFW.MakeContextCurrent(window)
@@ -61,15 +61,15 @@ function init_gui()
 end
 
 
-function ShowMenuWindow(psu_conf, dmm_conf, fgen_conf)
+function ShowMenuWindow(psu_conf, dmm_conf, fgen_conf, scope_conf)
 	CImGui.Begin("Menu")
 		@c CImGui.Checkbox("psu", &psu_conf.active)
 		CImGui.SameLine(), @c CImGui.Checkbox("dmm", &dmm_conf.active)
 		CImGui.SameLine(), @c CImGui.Checkbox("fgen", &fgen_conf.active)
-		#ImGui.SameLine(), @c CImGui.Checkbox("scope", &scope_conf.active)
+		CImGui.SameLine(), @c CImGui.Checkbox("scope", &scope_conf.active)
 	CImGui.End()
-	#return psu_conf, dmm_conf, fgen_conf, scope_conf
-	return psu_conf, dmm_conf, fgen_conf
+	return psu_conf, dmm_conf, fgen_conf, scope_conf
+	#return psu_conf, dmm_conf, fgen_conf
 end
 
 
@@ -112,6 +112,15 @@ end
 
 # DMM
 function draw_dmm_info(args...)
+	CImGui.Text(args[1])
+	for arg in args[2:end]
+		CImGui.SameLine(), CImGui.Text(arg)
+	end
+	return nothing
+end
+
+# Scope
+function draw_scope_info(args...)
 	CImGui.Text(args[1])
 	for arg in args[2:end]
 		CImGui.SameLine(), CImGui.Text(arg)

@@ -62,7 +62,7 @@ end
 function get_wfm(obj::GFG3015, ch)
 	# get_wfm(fgen, "C1")
 	ch = obj.instr_dict[ch]
-	cmd = ":FUNCtion:WAVeform ?"
+	cmd = ":FUNCtion:WAVeform?"
 	value = strip(query(obj.handle, cmd))
 	value = obj.rev_wfm_dict[value]
 end
@@ -78,7 +78,7 @@ end
 function get_amplit_unit(obj::GFG3015, ch)
 	# get_amplit_unit(fgen, "C1")
 	ch = obj.instr_dict[ch]
-	cmd = ":AMPLitude:UNIT ?"
+	cmd = ":AMPLitude:UNIT?"
 	value = strip(query(obj.handle, cmd))
 	value = obj.unit_dict[value]
 end
@@ -93,7 +93,7 @@ end
 function get_amplit(obj::GFG3015, ch)
 	# get_amplit(fgen, "C1")
 	ch = obj.instr_dict[ch]
-	cmd = ":AMPLitude:VOLTage ?"
+	cmd = ":AMPLitude:VOLTage?"
 	value = strip(query(obj.handle, cmd))
 end
 
@@ -107,7 +107,7 @@ end
 function get_offs(obj::GFG3015, ch)
 	# get_offs(fgen, "C1")
 	ch = obj.instr_dict[ch]
-	cmd = ":OFFSet ?"
+	cmd = ":OFFSet?"
 	value = strip(query(obj.handle, cmd))
 end
 
@@ -121,7 +121,7 @@ end
 function get_freq(obj::GFG3015, ch)
 	# get_freq(fgen, "C1")
 	ch = obj.instr_dict[ch]
-	cmd = ":FREQuency ?"
+	cmd = ":FREQuency?"
 	value = strip(query(obj.handle, cmd))
 end
 
@@ -135,6 +135,6 @@ end
 function get_duty(obj::GFG3015, ch)
 	# get_duty(fgen, "C1")
 	ch = obj.instr_dict[ch]
-	cmd = ":DUTY ?"
+	cmd = ":DUTY?"
 	value = strip(query(obj.handle, cmd))
 end
