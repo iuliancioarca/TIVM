@@ -5,30 +5,35 @@
 ```
 using TIVM
 
-# connect to power supply. the name MUST be "psu" in order for the GUI to work
-psu = connect!("ASRL14::INSTR")
-# connect to multimeter. the name MUST be "dmm" in order for the GUI to work
 dmm = connect!("ASRL5::INSTR")
-# connect to fgen. the name MUST be "fgen" in order for the GUI to work
+psu = connect!("ASRL14::INSTR")
 fgen = connect!("ASRL8::INSTR")
+scope = connect!("USB0::0x0699::0x0364::C057729::INSTR")
+
 
 # warmup
 try
 	@info query(psu, "*IDN?")
 	@info query(dmm, "*IDN?")
 	@info query(fgen, "*IDN?")
+	@info query(scope, "*IDN?")
 catch
 	@info query(psu, "*IDN?")
 	@info query(dmm, "*IDN?")
 	@info query(fgen, "*IDN?")
+	@info query(scope, "*IDN?")
 end
 
-# start GUI
-@async TIVM.start_gui(psu, dmm, fgen)
+# START gui
+@async TIVM.start_gui(psu_handle = psu, dmm_handle = dmm, fgen_handle = fgen, scope_handle = scope)
+
 
 # disconnect
 #disconnect!(psu)
 #disconnect!(dmm)
 #disconnect!(fgen)
+#disconnect!(scope)
 
 ```
+
+Lab scripts in "test" folder
