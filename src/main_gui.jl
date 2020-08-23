@@ -11,7 +11,7 @@ using Printf
 using ImPlot
 import CImGui.LibCImGui: ImGuiCond_Always, ImGuiCond_Once
 
-function start_gui(;psu_handle, dmm_handle, fgen_handle, scope_handle) #use keyword arguments
+function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0) #use keyword arguments
 	window, ctx = init_gui()
     # Main while loop
     try
