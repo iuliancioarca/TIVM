@@ -1,15 +1,3 @@
-using GenericInstruments
-using GenericInstruments: viWrite, query, viRead,viRead!
-using CImGui
-using CImGui.CSyntax
-using CImGui.CSyntax.CStatic
-using CImGui.GLFWBackend
-using CImGui.OpenGLBackend
-using CImGui.GLFWBackend.GLFW
-using CImGui.OpenGLBackend.ModernGL
-using Printf
-using ImPlot
-import CImGui.LibCImGui: ImGuiCond_Always, ImGuiCond_Once
 
 function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0) #use keyword arguments
 	window, ctx = init_gui()
