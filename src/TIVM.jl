@@ -9,7 +9,6 @@ using CImGui.GLFWBackend
 using CImGui.OpenGLBackend
 using CImGui.GLFWBackend.GLFW
 using CImGui.OpenGLBackend.ModernGL
-using Printf 
 using ImPlot
 import CImGui.LibCImGui: ImGuiCond_Always, ImGuiCond_Once
 
@@ -45,6 +44,6 @@ include("scope_gui.jl")
 include("main_gui.jl")
 
 
-export connect!, disconnect!, write, read, query
+export connect!, disconnect!, write, read, viWrite, viRead, query, start_gui
 
 end
