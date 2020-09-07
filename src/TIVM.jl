@@ -41,6 +41,7 @@ include("psu_gui.jl")
 include("dmm_gui.jl")
 include("fgen_gui.jl")
 include("scope_gui.jl")
+include("relays_gui.jl")
 include("main_gui.jl")
 
 

@@ -1,15 +1,22 @@
-mutable struct CImGuiToggleButton
-    name
+mutable struct CImGuiToggleButton	
+    on_name
+	off_name
+	name
     state
     off_color
     on_color
     hover_color
 end
 # Outer constructor
-CImGuiToggleButton(name) = CImGuiToggleButton(name, false,
+CImGuiToggleButton(on_name, off_name) = CImGuiToggleButton(on_name, off_name, off_name, false,
                         (0.1, 0.7, 0.7), (0.3, 0.9, 0.9), (0.2, 0.7, 0.7))
 function toggle!(x::CImGuiToggleButton)
     x.state = !x.state
+	if x.state
+		x.name = x.on_name
+	else
+		x.name = x.off_name
+	end
     return nothing
 end
 
@@ -48,9 +55,9 @@ PST3201Conf() = PST3201Conf(false,
 					"voltage",
 					0.0,
 					"na",
-					CImGuiToggleButton(" SHIFT "),
-					CImGuiToggleButton("OUTPUT"),
-					CImGuiToggleButton("REFRESH")
+					CImGuiToggleButton(" SHIFT ", " SHIFT "),
+					CImGuiToggleButton("OUTPUT", "OUTPUT"),
+					CImGuiToggleButton("REFRESH", "REFRESH")
 					)
 
 
@@ -69,9 +76,9 @@ mutable struct GDM8246Conf
 end
 # Outer constructor
 GDM8246Conf() = GDM8246Conf(false, "000.000", "----.---", "na", "C1", "na", 0.0,
-					CImGuiToggleButton(" SHIFT "),
-					CImGuiToggleButton("  AUTO  "),
-					CImGuiToggleButton("REFRESH")
+					CImGuiToggleButton(" SHIFT ", " SHIFT "),
+					CImGuiToggleButton("  AUTO  ", "  AUTO  "),
+					CImGuiToggleButton("REFRESH", "REFRESH")
 					)
 
 # FGEN
@@ -91,8 +98,8 @@ mutable struct GFG3015Conf
 end
 # Outer constructor
 GFG3015Conf() = GFG3015Conf(false, "1", "C1", "na", 0.0, "Vpp", "na","na","na","na",
-					CImGuiToggleButton(" SHIFT "),
-					CImGuiToggleButton("REFRESH")
+					CImGuiToggleButton(" SHIFT ", " SHIFT "),
+					CImGuiToggleButton("REFRESH", "REFRESH")
 					)
 
 
@@ -138,8 +145,34 @@ mutable struct TDS2002BConf
 				00.00,
 				"AUTO" ,
 				"off",
-				CImGuiToggleButton("ACQUIRE"),
+				CImGuiToggleButton("ACQUIRE", "ACQUIRE"),
 				collect(1:300),
 				randn(300),
 				randn(300)
 				)
+
+# RELAYS matrix
+mutable struct RelaysConf
+	active
+	C1
+	C2
+	C3
+	C4
+	C5
+	C6
+	C7
+	C8
+	C9
+end
+# Outer constructor
+RelaysConf() = RelaysConf(false,
+					CImGuiToggleButton("ON ##C1", "OFF##C1"),
+					CImGuiToggleButton("ON ##C2", "OFF##C2"),
+					CImGuiToggleButton("ON ##C3", "OFF##C3"),
+					CImGuiToggleButton("ON ##C4", "OFF##C4"),
+					CImGuiToggleButton("ON ##C5", "OFF##C5"),
+					CImGuiToggleButton("ON ##C6", "OFF##C6"),
+					CImGuiToggleButton("ON ##C7", "OFF##C7"),
+					CImGuiToggleButton("ON ##C8", "OFF##C8"),
+					CImGuiToggleButton("ON ##C9", "OFF##C9")					
+					)

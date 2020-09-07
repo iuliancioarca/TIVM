@@ -61,15 +61,15 @@ function init_gui()
 end
 
 
-function ShowMenuWindow(psu_conf, dmm_conf, fgen_conf, scope_conf)
+function ShowMenuWindow(psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf)
 	CImGui.Begin("Menu")
 		@c CImGui.Checkbox("psu", &psu_conf.active)
 		CImGui.SameLine(), @c CImGui.Checkbox("dmm", &dmm_conf.active)
 		CImGui.SameLine(), @c CImGui.Checkbox("fgen", &fgen_conf.active)
 		CImGui.SameLine(), @c CImGui.Checkbox("scope", &scope_conf.active)
+		CImGui.SameLine(), @c CImGui.Checkbox("relays", &relays_conf.active)
 	CImGui.End()
-	return psu_conf, dmm_conf, fgen_conf, scope_conf
-	#return psu_conf, dmm_conf, fgen_conf
+	return psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf	
 end
 
 
@@ -93,6 +93,7 @@ function draw_toggle_button(button)
 		CImGui.PushStyleColor(CImGui.ImGuiCol_ButtonHovered, CImGui.HSV(button.hover_color...))
 		CImGui.PushStyleColor(CImGui.ImGuiCol_ButtonActive, CImGui.HSV(button.on_color...))
 	end
+	#pressed = CImGui.Button(button.name, CImGui.ImVec2(30,20))  # 30px width, 20px height
 	pressed = CImGui.Button(button.name) 
 	pressed && toggle!(button)	
 	

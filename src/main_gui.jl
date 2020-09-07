@@ -1,5 +1,5 @@
 
-function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0) #use keyword arguments
+function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0, relays_handle=0) #use keyword arguments
 	window, ctx = init_gui()
     # Main while loop
     try
@@ -13,11 +13,13 @@ function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0) #
 		dmm = GDM8246(dmm_handle)
 		fgen = GFG3015(fgen_handle)
 		scope = TDS2002B(scope_handle)      #Daniel
+		relays = relays_handle
 		# instantiate gui conf objects
 		psu_conf = PST3201Conf()
 		dmm_conf = GDM8246Conf()
 		fgen_conf = GFG3015Conf()
 		scope_conf = TDS2002BConf()            #Daniel
+		relays_conf = RelaysConf()            #Daniel
         while !GLFW.WindowShouldClose(window)
 			refresh_cnt == refresh_cnt_max && (refresh_cnt=0)
 			refresh_cnt = refresh_cnt + 1
@@ -29,13 +31,14 @@ function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0) #
 			CImGui.NewFrame()
 			
 			# Display checkboxes for activating instrument front panels
-			psu_conf, dmm_conf, fgen_conf, scope_conf= ShowMenuWindow(psu_conf, dmm_conf, fgen_conf, scope_conf)		#Daniel		
+			psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf = ShowMenuWindow(psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf)		#Daniel		
 					
 			# DISPLAY INSTRUMENTS FRONT PANELS
 			psu_conf.active && (psu_conf = ShowPSUWindow(psu, psu_conf, rev_state_dict, refresh_cnt))
 			dmm_conf.active && (dmm_conf = ShowDMMWindow(dmm, dmm_conf, rev_state_dict, refresh_cnt))
 			fgen_conf.active && (fgen_conf = ShowFGENWindow(fgen, fgen_conf, rev_state_dict, refresh_cnt))
 			scope_conf.active && (scope_conf = ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt))            #Daniel
+			relays_conf.active && (relays_conf = ShowRelaysWindow(relays, relays_conf, refresh_cnt))
 			# RENDER GUI
 			render_gui(window, clear_color; fps=fps)
 		end
