@@ -127,10 +127,11 @@ function Trigger_Aquistion(obj::TDS2002B, ch)
 	viRead!(obj.handle, y_buffer)
 	
 	gain = parse(Float64, query(obj.handle, "WFMPre:YMUlt?"))
-	offs = parse(Float64, query(obj.handle, "WFMPre:YOFf?"))
+	#offs = parse(Float64, query(obj.handle, "WFMPre:YOFf?")) # THIS IS A PIECE OF SHIT COMMAND!!!!
+	offs = parse(Float64, query(obj.handle, "$ch:POSition?"))
 	dt = parse(Float64, query(obj.handle, "WFMPre:XINcr?"))
 
-	y = Float64.(reinterpret(Int8, y_buffer[7:end])) .* gain .+ offs
+	y = Float64.(reinterpret(Int8, y_buffer[7:end])) .* gain .- offs
 	t = collect(0:dt:dt*(length(y)-1))
 	
 	return t, y

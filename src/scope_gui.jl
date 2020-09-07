@@ -68,7 +68,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 			x = scope_conf.t
 			y1 = scope_conf.y1
 			y2 = scope_conf.y2
-			ImPlot.SetNextPlotLimits(0, x[end], -4, 4, ImGuiCond_Always)
+			ImPlot.SetNextPlotLimits(0, x[end], -10, 10, ImGuiCond_Always)
 			
             # Using '##' in the label name hides the plot label, but lets 
             # us keep the label ID unique for modifying styling etc.
