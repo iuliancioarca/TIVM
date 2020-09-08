@@ -57,9 +57,13 @@ function get_horizontal_scale(obj::TDS2002B, time)
 end
 
 function get_ch_position(obj::TDS2002B, ch)
-    time = obj.instr_dict[time]
-    cmd = "$ch:POSition?')"
+    cmd = "$ch:POSition?"
     value = strip(query(obj.handle, cmd))
+end
+
+function set_ch_position(obj::TDS2002B, ch, lev)
+    cmd = "$ch:POSition $lev"
+    value = write(obj.handle, cmd)
 end
 
 function get_trig_data(obj::TDS2002B, trig)
@@ -68,12 +72,11 @@ function get_trig_data(obj::TDS2002B, trig)
     value = strip(query(obj.handle, cmd))
 end
 
-function get_meas_data(obj::TDS2002B, Meas_Nr1, select)
-    ch = obj.instr_dict[Meas_Nr1]
-    select = obj.instr_dict[select]
-    cmd = "*OPC?"
-    value = strip(query(obj.handle, cmd))
-    cmd = "MEASUrement:MEAS$ch:$select"
+function get_meas_data(obj::TDS2002B, Meas_Nr1)
+    nr = obj.instr_dict[Meas_Nr1]
+    #cmd = "*OPC?"
+    #value = strip(query(obj.handle, cmd))
+    cmd = "MEASUrement:MEAS$nr:VALUE?"
     value = strip(query(obj.handle, cmd))
 end
 

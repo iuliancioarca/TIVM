@@ -115,7 +115,9 @@ mutable struct TDS2002BConf
 	Trigger_level
 	Trigger_mode           #triggered or imediate
 	CH1_Volt_div_new
+	CH1_Offset_new
 	CH2_Volt_div_new
+	CH2_Offset_new
 	Time_div_new
 	Trigger_source_new
 	Trigger_level_new
@@ -152,7 +154,9 @@ mutable struct TDS2002BConf
 				"01.00",
 				"AUTO",
 				00.00,   #CH1_Volt_div_new
+				00.00,   #CH1_Offset_new
 				00.00,   #CH2_Volt_div_new
+				00.00,   #CH2_Offset_new
 				00.000,    #Time_div_new
 				"CH1",   
 				00.00,
