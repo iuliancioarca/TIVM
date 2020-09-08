@@ -4,6 +4,8 @@ function update_scope_conf!(scope_conf, scope, refresh_cnt)
      # Get Channel Volt per Div 
      #refresh_cnt==base*1  && (scope_conf.CH1_Volt_div = get_vertical_scale(scope, "CH1"))
      #refresh_cnt==base*2 && (scope_conf.CH2_Volt_div = get_vertical_scale(scope, "CH2"))
+     ##refresh_cnt==base*3 && (scope_conf.CH1_Offset = get_ch_position(scope, "CH1"))
+     ##refresh_cnt==base*4 && (scope_conf.CH2_Offset = get_ch_position(scope, "CH2"))
      #Get Time per Div
      #refresh_cnt==base*3 && (scope_conf.Time_div = get_horizontal_scale(scope, "Time"))
      #Get Triger Seting

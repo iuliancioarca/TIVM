@@ -3,26 +3,37 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	# hack for dropdowns until we implementd dicts
 	channels = ["CH1" , "CH2"]
 	modes = ["NORMal", "AUTO"]
+	Measurement_Type =["CH1FREQuency","MEAN","PERIod","PK2pk","CRMs","MINImum","MAXImum","RISe","FALL","PWIdth","NWIdth"]
 	
 	# DRAW DISPLAY INFO
-	## CH1
-	draw_scope_info("CH1 Scale  ", scope_conf.CH1_Volt_div, " ","V")
+	## Row1
+	draw_scope_info("CH1 Scale   ", scope_conf.CH1_Volt_div, " ","V")
 	CImGui.SameLine()
 	CImGui.Text("  ")
 	CImGui.SameLine()
 	draw_scope_info("Triger Channel", scope_conf.Trigger_source )
-    #CH2
-	draw_scope_info("CH2 scale  ", scope_conf.CH2_Volt_div, " ","V")
+	
+	
+    #Row2
+	draw_scope_info("CH1 Offset  ", scope_conf.CH1_Offset, " ","V")
 	CImGui.SameLine()
 	CImGui.Text("  ")
 	CImGui.SameLine()
-	draw_scope_info("Triger Level  ", scope_conf.Trigger_level,"V")
-     ## Time Scale
-	draw_scope_info("Time Scale ", scope_conf.Time_div, "","s")
+	draw_scope_info("Triger Level  ", scope_conf.Trigger_level,"","V")
+	
+	#Row3
+	draw_scope_info("CH2 scale   ", scope_conf.CH2_Volt_div, " ","V")
 	CImGui.SameLine()
 	CImGui.Text("  ")
 	CImGui.SameLine()
 	draw_scope_info("Triger Mode   ",scope_conf.Trigger_mode )	
+	
+	#Ro4
+	draw_scope_info("CH2 Offset  ", scope_conf.CH2_Offset, " ","V")
+	CImGui.SameLine()
+	CImGui.Text("  ")
+	CImGui.SameLine()
+	draw_scope_info("Time Scale    ", scope_conf.Time_div, "","s")
 	CImGui.Text("")
 	CImGui.Separator()
 
@@ -149,6 +160,111 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	end
 	scope_conf.Trigger_mode_new = modes[mod_selector+1]
 	
+	# Measurement 1; 
+	CImGui.Button("Set Meas 1 ") && begin
+	set_meas(scope,  1 , scope_conf.Measurement_source1, scope_conf.Measurement_Type1 );
+    end
+	CImGui.SameLine()
+	## Draw INPUT BOX
+	CImGui.PushItemWidth(50)
+	ch_selector1 = @cstatic ch_selector1=Cint(0) begin
+		@c CImGui.Combo("C1", &ch_selector1, "CH1\0CH2\0")
+	end
+	scope_conf.Measurement_source1 = channels[ch_selector1+1]
+	CImGui.SameLine()
+	CImGui.PushItemWidth(137)
+	Measurement_Type1 = @cstatic Measurement_Type1=Cint(0) begin
+		@c CImGui.Combo("T1", &Measurement_Type1, "FREQuency\0MEAN\0PERIod\0PK2pk\0CRMs\0MINImum\0MAXImum\0RISe\0FALL\0PWIdth\0NWIdth\0")
+	end
+	scope_conf.Measurement_Type1 = Measurement_Type[Measurement_Type1+1]
+	CImGui.SameLine()
+	draw_scope_info( "  Meas1:",scope_conf.Measurement_Value1 )
+
+
+	# Measurement 2; 
+	CImGui.Button("Set Meas 2 ") && begin
+	set_meas(scope,  2 , scope_conf.Measurement_source2, scope_conf.Measurement_Type2 );
+	end
+	CImGui.SameLine()
+	## Draw INPUT BOX
+	CImGui.PushItemWidth(50)
+	ch_selector2 = @cstatic ch_selector2=Cint(0) begin
+		@c CImGui.Combo("C2", &ch_selector2, "CH1\0CH2\0")
+	end
+	scope_conf.Measurement_source2 = channels[ch_selector2+1]
+	CImGui.SameLine()
+	CImGui.PushItemWidth(137)
+	Measurement_Type2 = @cstatic Measurement_Type2=Cint(0) begin
+		@c CImGui.Combo("T2", &Measurement_Type2, "FREQuency\0MEAN\0PERIod\0PK2pk\0CRMs\0MINImum\0MAXImum\0RISe\0FALL\0PWIdth\0NWIdth\0")
+	end
+	scope_conf.Measurement_Type1 = Measurement_Type[Measurement_Type1+1]
+	CImGui.SameLine()
+	draw_scope_info( "  Meas2:",scope_conf.Measurement_Value1 )
+
+	# Measurement 3; 
+	CImGui.Button("Set Meas 3 ") && begin
+	set_meas(scope,  3 , scope_conf.Measurement_source3, scope_conf.Measurement_Type3 );
+	end
+	CImGui.SameLine()
+	## Draw INPUT BOX
+	CImGui.PushItemWidth(50)
+	ch_selector3 = @cstatic ch_selector3=Cint(0) begin
+		@c CImGui.Combo("C3", &ch_selector3, "CH1\0CH2\0")
+	end
+	scope_conf.Measurement_source3 = channels[ch_selector3+1]
+	CImGui.SameLine()
+	CImGui.PushItemWidth(137)
+	Measurement_Type3 = @cstatic Measurement_Type3=Cint(0) begin
+		@c CImGui.Combo("T3", &Measurement_Type3, "FREQuency\0MEAN\0PERIod\0PK2pk\0CRMs\0MINImum\0MAXImum\0RISe\0FALL\0PWIdth\0NWIdth\0")
+	end
+	scope_conf.Measurement_Type3 = Measurement_Type[Measurement_Type3+1]
+	CImGui.SameLine()
+	draw_scope_info( "  Meas3:",scope_conf.Measurement_Value1 )
+
+
+	# Measurement 4; 
+	CImGui.Button("Set Meas 4 ") && begin
+	set_meas(scope,  4 , scope_conf.Measurement_source4, scope_conf.Measurement_Type4 );
+	end
+	CImGui.SameLine()
+	## Draw INPUT BOX
+	CImGui.PushItemWidth(50)
+	ch_selector4 = @cstatic ch_selector4=Cint(0) begin
+		@c CImGui.Combo("C4", &ch_selector4, "CH1\0CH2\0")
+	end
+	scope_conf.Measurement_source4 = channels[ch_selector4+1]
+	CImGui.SameLine()
+	CImGui.PushItemWidth(137)
+	Measurement_Type4 = @cstatic Measurement_Type4=Cint(0) begin
+		@c CImGui.Combo("T4", &Measurement_Type4, "FREQuency\0MEAN\0PERIod\0PK2pk\0CRMs\0MINImum\0MAXImum\0RISe\0FALL\0PWIdth\0NWIdth\0")
+	end
+	scope_conf.Measurement_Type4 = Measurement_Type[Measurement_Type4+1]
+	CImGui.SameLine()
+	draw_scope_info( "  Meas4:",scope_conf.Measurement_Value1 )
+
+
+	# Measurement 35 
+	CImGui.Button("Set Meas 5 ") && begin
+	set_meas(scope,  5 , scope_conf.Measurement_source5, scope_conf.Measurement_Type5 );
+	end
+	CImGui.SameLine()
+	## Draw INPUT BOX
+	CImGui.PushItemWidth(50)
+	ch_selector5 = @cstatic ch_selector5=Cint(0) begin
+		@c CImGui.Combo("C3", &ch_selector5, "CH1\0CH2\0")
+	end
+	scope_conf.Measurement_source5 = channels[ch_selector5+1]
+	CImGui.SameLine()
+	CImGui.PushItemWidth(137)
+	Measurement_Type5 = @cstatic Measurement_Type5=Cint(0) begin
+		@c CImGui.Combo("T5", &Measurement_Type5, "FREQuency\0MEAN\0PERIod\0PK2pk\0CRMs\0MINImum\0MAXImum\0RISe\0FALL\0PWIdth\0NWIdth\0")
+	end
+	scope_conf.Measurement_Type5 = Measurement_Type[Measurement_Type5+1]
+	CImGui.SameLine()
+	draw_scope_info( "  Meas5:",scope_conf.Measurement_Value1 )
+
+
+
 	CImGui.End()
 	return scope_conf
 end

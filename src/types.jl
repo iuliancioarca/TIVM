@@ -107,14 +107,13 @@ GFG3015Conf() = GFG3015Conf(false, "1", "C1", "na", 0.0, "Vpp", "na","na","na","
 mutable struct TDS2002BConf
 	active
 	CH1_Volt_div
+	CH1_Offset
 	CH2_Volt_div
+	CH2_Offset
 	Time_div
 	Trigger_source
 	Trigger_level
 	Trigger_mode           #triggered or imediate
-	Measurement_source
-	Measurement_Type
-	Measurement_Value
 	CH1_Volt_div_new
 	CH2_Volt_div_new
 	Time_div_new
@@ -126,18 +125,32 @@ mutable struct TDS2002BConf
 	t
 	y1
 	y2
+	Measurement_source1
+	Measurement_Type1
+	Measurement_Value1
+	Measurement_source2
+	Measurement_Type2
+	Measurement_Value2
+	Measurement_source3
+	Measurement_Type3
+	Measurement_Value3
+	Measurement_source4
+	Measurement_Type4
+	Measurement_Value4
+	Measurement_source5
+	Measurement_Type5
+	Measurement_Value5
 	end
 					# Outer constructor
 	TDS2002BConf() = TDS2002BConf(false,
 				"1.00", 
+				"0.00", 
 				"1.00",
+				"0.00", 
 				"0.001",    #in seconds
 				"CH1",
-				"1.00",
+				"01.00",
 				"AUTO",
-				"CH1",
-				"Maximum",
-				"00.00",
 				00.00,   #CH1_Volt_div_new
 				00.00,   #CH2_Volt_div_new
 				00.000,    #Time_div_new
@@ -148,7 +161,22 @@ mutable struct TDS2002BConf
 				CImGuiToggleButton("ACQUIRE", "ACQUIRE"),
 				collect(1:300),
 				randn(300),
-				randn(300)
+				randn(300),
+				"CH1",
+				"Maximum",
+				"00.00",
+				"CH1",
+				"Maximum",
+				"00.00",
+				"CH1",
+				"Maximum",
+				"00.00",
+				"CH1",
+				"Maximum",
+				"00.00",
+				"CH1",
+				"Maximum",
+				"00.00"
 				)
 
 # RELAYS matrix
