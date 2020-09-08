@@ -128,7 +128,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	CImGui.SameLine()
 	# Draw INPUT BOX
 	CImGui.PushItemWidth(150)
-	@c CImGui.InputDouble("S1", &scope_conf.CH1_Volt_div_new, 0.01, 0.5, "%.4f")
+	@c CImGui.InputDouble("S1g", &scope_conf.CH1_Volt_div_new, 0.01, 0.5, "%.4f")
 
 	# ch1 vertical pos 
 	CImGui.SameLine()
@@ -138,7 +138,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	CImGui.SameLine()
 	# Draw INPUT BOX
 	CImGui.PushItemWidth(150)
-	@c CImGui.InputDouble("S1", &scope_conf.CH1_Offset_new, 0.01, 10.0, "%.4f")
+	@c CImGui.InputDouble("S1s", &scope_conf.CH1_Offset_new, 0.01, 10.0, "%.4f")
 
     # ch2  scale 
 	CImGui.Button("Set CH2 Scale       ") && begin
@@ -147,7 +147,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	CImGui.SameLine()
 	# Draw INPUT BOX
 	CImGui.PushItemWidth(150)
-	@c CImGui.InputDouble("S2", &scope_conf.CH2_Volt_div_new, 0.01, 1.0, "%.4f")
+	@c CImGui.InputDouble("S2g", &scope_conf.CH2_Volt_div_new, 0.01, 1.0, "%.4f")
 
 	# ch2 vertical pos 
 	CImGui.SameLine()
@@ -157,7 +157,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	CImGui.SameLine()
 	# Draw INPUT BOX
 	CImGui.PushItemWidth(150)
-	@c CImGui.InputDouble("S2", &scope_conf.CH2_Offset_new, 0.01, 10.0, "%.4f")
+	@c CImGui.InputDouble("S2s", &scope_conf.CH2_Offset_new, 0.01, 10.0, "%.4f")
 
     # Timer per div 
 	CImGui.Button("Set Horizontal Scale") && begin
