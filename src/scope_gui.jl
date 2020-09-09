@@ -7,7 +7,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	
 	# DRAW DISPLAY INFO
 	## Row1
-	draw_scope_info("CH1 Scale   ", scope_conf.CH1_Volt_div, " ","V")
+	draw_scope_info("CH1 Scale   ", scope_conf.CH1_Volt_div, " ","V/div")
 	CImGui.SameLine()
 	CImGui.Text("  ")
 	CImGui.SameLine()
@@ -15,25 +15,25 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	
 	
     #Row2
-	draw_scope_info("CH1 Offset  ", scope_conf.CH1_Offset, " ","V")
+	draw_scope_info("CH1 Offset  ", scope_conf.CH1_Offset, " ","div")
 	CImGui.SameLine()
 	CImGui.Text("  ")
 	CImGui.SameLine()
-	draw_scope_info("Triger Level  ", scope_conf.Trigger_level,"","V")
+	draw_scope_info("  Triger Level  ", scope_conf.Trigger_level,"","V")
 	
 	#Row3
-	draw_scope_info("CH2 scale   ", scope_conf.CH2_Volt_div, " ","V")
+	draw_scope_info("CH2 scale   ", scope_conf.CH2_Volt_div, " ","V/div")
 	CImGui.SameLine()
 	CImGui.Text("  ")
 	CImGui.SameLine()
 	draw_scope_info("Triger Mode   ",scope_conf.Trigger_mode )	
 	
 	#Ro4
-	draw_scope_info("CH2 Offset  ", scope_conf.CH2_Offset, " ","V")
+	draw_scope_info("CH2 Offset  ", scope_conf.CH2_Offset, " ","div")
 	CImGui.SameLine()
 	CImGui.Text("  ")
 	CImGui.SameLine()
-	draw_scope_info("Time Scale    ", scope_conf.Time_div, "","s")
+	draw_scope_info("  Time Scale    ", scope_conf.Time_div, "","sec/div")
 	CImGui.Text("")
 	CImGui.Separator()
 
@@ -70,15 +70,13 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 		if show_window
 			CH1_y_div = parse(Float64,scope_conf.CH1_Volt_div)
 			CH2_y_div = parse(Float64,scope_conf.CH2_Volt_div)
+			CH1_y_offs = parse(Float64,scope_conf.CH1_Offset)
+			CH2_y_offs = parse(Float64,scope_conf.CH2_Offset)			
 			#time_div  = parse(Float64,scope_conf.Time_div)
-			#y = AbstractArray{Float64,300}
-			#x = range(0.0, step=1, length=300) |> collect   # need to change step to waveform time , lenght to waveform lenght               	
-			#y1 = rand(300) 
-			#y2 = rand(300) 
-			
+
 			x = scope_conf.t
-			y1 = scope_conf.y1 ./ CH1_y_div
-			y2 = scope_conf.y2 ./ CH2_y_div
+			y1 = (scope_conf.y1 .+ CH1_y_offs) ./ CH1_y_div 
+			y2 = (scope_conf.y2 .+ CH2_y_offs) ./ CH2_y_div 
 			ImPlot.SetNextPlotLimits(0, x[end], -6, 6, ImGuiCond_Always)
 			
             # Using '##' in the label name hides the plot label, but lets 
@@ -128,7 +126,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	CImGui.SameLine()
 	# Draw INPUT BOX
 	CImGui.PushItemWidth(150)
-	@c CImGui.InputDouble("S1g", &scope_conf.CH1_Volt_div_new, 0.01, 0.5, "%.4f")
+	@c CImGui.InputDouble("V/div##1", &scope_conf.CH1_Volt_div_new, 0.01, 0.5, "%.4f")
 
 	# ch1 vertical pos 
 	CImGui.SameLine()
@@ -138,7 +136,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	CImGui.SameLine()
 	# Draw INPUT BOX
 	CImGui.PushItemWidth(150)
-	@c CImGui.InputDouble("S1s", &scope_conf.CH1_Offset_new, 0.01, 10.0, "%.4f")
+	@c CImGui.InputDouble("div##1", &scope_conf.CH1_Offset_new, 0.01, 10.0, "%.4f")
 
     # ch2  scale 
 	CImGui.Button("Set CH2 Scale       ") && begin
@@ -147,7 +145,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	CImGui.SameLine()
 	# Draw INPUT BOX
 	CImGui.PushItemWidth(150)
-	@c CImGui.InputDouble("S2g", &scope_conf.CH2_Volt_div_new, 0.01, 1.0, "%.4f")
+	@c CImGui.InputDouble("V/div##2", &scope_conf.CH2_Volt_div_new, 0.01, 1.0, "%.4f")
 
 	# ch2 vertical pos 
 	CImGui.SameLine()
@@ -157,7 +155,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	CImGui.SameLine()
 	# Draw INPUT BOX
 	CImGui.PushItemWidth(150)
-	@c CImGui.InputDouble("S2s", &scope_conf.CH2_Offset_new, 0.01, 10.0, "%.4f")
+	@c CImGui.InputDouble("div##2", &scope_conf.CH2_Offset_new, 0.01, 10.0, "%.4f")
 
     # Timer per div 
 	CImGui.Button("Set Horizontal Scale") && begin
@@ -166,7 +164,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 	CImGui.SameLine()
 	# Draw INPUT BOX
 	CImGui.PushItemWidth(150)
-	@c CImGui.InputDouble("T", &scope_conf.Time_div_new, 0.01, 1.0, "%.6f")
+	@c CImGui.InputDouble("sec", &scope_conf.Time_div_new, 0.01, 1.0, "%.6f")
 
 	
 	# Trigger channel; 
