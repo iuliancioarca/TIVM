@@ -1,4 +1,4 @@
-function ShowFGENWindow(fgen, fgen_conf, rev_state_dict, refresh_cnt)
+function ShowFGENWindow(fgen, fgen_conf, rev_state_dict, refresh_cnt, base)
 	CImGui.Begin("GFG3015 Function Generator")
 	# DRAW DISPLAY INFO
 
@@ -47,7 +47,7 @@ function ShowFGENWindow(fgen, fgen_conf, rev_state_dict, refresh_cnt)
 	# Draw REFRESH
 	CImGui.SameLine()
 	fgen_conf.refresh_btn, pressed = draw_toggle_button(fgen_conf.refresh_btn)			
-	fgen_conf.refresh_btn.state && @async update_fgen_conf!(fgen_conf, fgen, refresh_cnt)
+	fgen_conf.refresh_btn.state && @async update_fgen_conf!(fgen_conf, fgen, refresh_cnt, base)
 
 	CImGui.End()
 	return fgen_conf

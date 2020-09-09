@@ -1,6 +1,5 @@
 
-function update_psu_conf!(psu_conf, psu, refresh_cnt)
-	 base = 4
+function update_psu_conf!(psu_conf, psu, refresh_cnt, base)	 
      # Meas Voltage more often
      refresh_cnt==base*1 && (psu_conf.C1.volt_meas = get_meas(psu, "C1", "voltage"))
      refresh_cnt==base*2 && (psu_conf.C2.volt_meas = get_meas(psu, "C2", "voltage"))

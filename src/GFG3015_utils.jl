@@ -1,6 +1,5 @@
 
-function update_fgen_conf!(fgen_conf, fgen::GFG3015, refresh_cnt)
-    base = 4
+function update_fgen_conf!(fgen_conf, fgen::GFG3015, refresh_cnt, base)    
     (refresh_cnt==base*1) && (fgen_conf.crt_func = get_wfm(fgen, fgen_conf.crt_chan))
 	
 	# this is the most frequent source of timeouts

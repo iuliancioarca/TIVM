@@ -1,4 +1,4 @@
-function ShowDMMWindow(dmm, dmm_conf, rev_state_dict, refresh_cnt)
+function ShowDMMWindow(dmm, dmm_conf, rev_state_dict, refresh_cnt, base)
 	CImGui.Begin("GDM8246 Digital Multimeter")
 	# DRAW DISPLAY INFO
 	draw_dmm_info("Secondary", "   Primary")
@@ -129,7 +129,7 @@ function ShowDMMWindow(dmm, dmm_conf, rev_state_dict, refresh_cnt)
 	# Draw REFRESH
 	CImGui.SameLine()
 	dmm_conf.refresh_btn, pressed = draw_toggle_button(dmm_conf.refresh_btn)			
-	dmm_conf.refresh_btn.state && @async update_dmm_conf!(dmm_conf, dmm, refresh_cnt)
+	dmm_conf.refresh_btn.state && @async update_dmm_conf!(dmm_conf, dmm, refresh_cnt, base)
 
 	CImGui.End()
 	return dmm_conf

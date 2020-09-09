@@ -40,7 +40,7 @@ function init_gui()
     GLFW.SetErrorCallback(error_callback)
 
     # create window
-    window = GLFW.CreateWindow(1000, 600, "Lab Instruments")
+    window = GLFW.CreateWindow(1300, 800, "Lab Instruments")
     @assert window != C_NULL
     
     GLFW.MakeContextCurrent(window)

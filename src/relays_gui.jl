@@ -1,4 +1,4 @@
-function ShowRelaysWindow(relays, relays_conf, refresh_cnt)
+function ShowRelaysWindow(relays, relays_conf, refresh_cnt, base)
 	CImGui.Begin("TIVM setup relays")	
 	# DRAW BUTTONS
 	CImGui.Text("C1")

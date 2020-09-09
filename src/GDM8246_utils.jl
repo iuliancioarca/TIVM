@@ -1,6 +1,5 @@
 
-function update_dmm_conf!(dmm_conf, dmm, refresh_cnt)
-    base = 4
+function update_dmm_conf!(dmm_conf, dmm, refresh_cnt, base)    
     # measurements
     refresh_cnt==base*1  && (dmm_conf.primary = get_primary_measurement(dmm, dmm_conf.crt_chan))
     refresh_cnt==base*5  && begin

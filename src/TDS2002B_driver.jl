@@ -126,20 +126,20 @@ function set_meas(obj::TDS2002B, Meas_Nr1, ch, Type)
     set_meas_type(obj, Meas_Nr1, Type)
 end
 
+# select channel for acq and config
+function conf_acq_ch(obj::TDS2002B, ch)
+	ch = obj.instr_dict[ch]
+    write(obj.handle, "SELect:$ch ON")
+	write(obj.handle, "DATa:SOUrce $ch;DATa:ENCdg SRIBINARY;DATa:WIDth 1;DATa:STARt 1;DATa:STOP 2500")
+	write(obj.handle, "CURVE?")
+end
+
 
 
 function Trigger_Aquistion(obj::TDS2002B, ch)
 	ch = obj.instr_dict[ch]
-	write(obj.handle, "SELect:$ch ON")
-	write(obj.handle, "DATa:SOUrce $ch;DATa:ENCdg SRIBINARY;DATa:WIDth 1;DATa:STARt 1;DATa:STOP 2500")
-	#write(obj.handle, "DATa:ENCdg SRIBINARY")
-	#write(obj.handle, "DATa:WIDth 1")
-	#write(obj.handle, "DATa:STARt 1")
-	#write(obj.handle, "DATa:STOP 2500")
-	#wfminfo = query(obj.handle, "WFMPRE?")
-	
+
 	y_buffer = zeros(UInt8, 2506)
-	write(obj.handle, "CURVE?")
 	viRead!(obj.handle, y_buffer)
 	
 	gain = parse(Float64, query(obj.handle, "WFMPre:YMUlt?"))

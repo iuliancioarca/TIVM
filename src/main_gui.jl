@@ -6,7 +6,8 @@ function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0, r
         clear_color = Cfloat[0.45, 0.55, 0.60, 1.00]
 		fps = 200
 		refresh_cnt = 0
-		refresh_cnt_max = 105
+		refresh_cnt_max = 100
+		base = 4
 		rev_state_dict = Dict("on"=>"off", "off"=>"on")
 		# instantiate instr objects
 		psu = PST3201(psu_handle)
@@ -34,11 +35,11 @@ function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0, r
 			psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf = ShowMenuWindow(psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf)		#Daniel		
 					
 			# DISPLAY INSTRUMENTS FRONT PANELS
-			psu_conf.active && (psu_conf = ShowPSUWindow(psu, psu_conf, rev_state_dict, refresh_cnt))
-			dmm_conf.active && (dmm_conf = ShowDMMWindow(dmm, dmm_conf, rev_state_dict, refresh_cnt))
-			fgen_conf.active && (fgen_conf = ShowFGENWindow(fgen, fgen_conf, rev_state_dict, refresh_cnt))
-			scope_conf.active && (scope_conf = ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt))            #Daniel
-			relays_conf.active && (relays_conf = ShowRelaysWindow(relays, relays_conf, refresh_cnt))
+			psu_conf.active && (psu_conf = ShowPSUWindow(psu, psu_conf, rev_state_dict, refresh_cnt, base))
+			dmm_conf.active && (dmm_conf = ShowDMMWindow(dmm, dmm_conf, rev_state_dict, refresh_cnt, base))
+			fgen_conf.active && (fgen_conf = ShowFGENWindow(fgen, fgen_conf, rev_state_dict, refresh_cnt, base))
+			scope_conf.active && (scope_conf = ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base))            #Daniel
+			relays_conf.active && (relays_conf = ShowRelaysWindow(relays, relays_conf, refresh_cnt, base))
 			# RENDER GUI
 			render_gui(window, clear_color; fps=fps)
 		end

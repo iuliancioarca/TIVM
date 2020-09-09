@@ -19,11 +19,11 @@ function write(handle, cmd::String)
 	return nothing
 end
 
-function read(handle, bufSize::UInt32=0x00000400)
+function read(handle, bufSize::UInt32=0x00000100)
 	strip(GI.viRead(handle; bufSize=bufSize), ['\r', '\n'])
 end
 
-function query(handle, cmd::String, delay::Real=0.01)
+function query(handle, cmd::String, delay::Real=0.0)
     #flush read buffer
     #GenericInstruments.viFlush(psu.handle, GenericInstruments.VI_READ_BUF_DISCARD)
 	write(handle, cmd)

@@ -1,6 +1,5 @@
 
-function update_scope_conf!(scope_conf, scope, refresh_cnt)
-	 base = 4
+function update_scope_conf!(scope_conf, scope, refresh_cnt, base)	 
      # Get Channel Volt per Div 
      #refresh_cnt==base*1  && (scope_conf.CH1_Volt_div = get_vertical_scale(scope, "CH1"))
      #refresh_cnt==base*2 && (scope_conf.CH2_Volt_div = get_vertical_scale(scope, "CH2"))
@@ -18,8 +17,13 @@ function update_scope_conf!(scope_conf, scope, refresh_cnt)
      #(refresh_cnt==base*5) && (scope_conf.Measurement_Value3 = get_meas_data(scope, "Meas_Nr3"))
 	 #(refresh_cnt==base*6) && (scope_conf.Measurement_Value4 = get_meas_data(scope, "Meas_Nr4"))
      #(refresh_cnt==base*7) && (scope_conf.Measurement_Value5 = get_meas_data(scope, "Meas_Nr5"))
-	# get waveforms
-	(refresh_cnt==base*1 || refresh_cnt==base*12) && ((scope_conf.t, scope_conf.y1) = Trigger_Aquistion(scope, "CH1"))
-	(refresh_cnt==base*6 || refresh_cnt==base*17) && ((scope_conf.t, scope_conf.y2) = Trigger_Aquistion(scope, "CH2"))
+	 
+	 # conf acq chan1 and acquire	 
+	 (refresh_cnt==base*1) && (conf_acq_ch(scope, "CH1"))
+	 (refresh_cnt==base*5) && ((scope_conf.t, scope_conf.y1) = Trigger_Aquistion(scope, "CH1"))
+	 
+	 # conf acq chan2 and acquire	 
+	 (refresh_cnt==base*10) && (conf_acq_ch(scope, "CH2"))
+	 (refresh_cnt==base*15) && ((scope_conf.t, scope_conf.y2) = Trigger_Aquistion(scope, "CH2"))	 
 
 end
