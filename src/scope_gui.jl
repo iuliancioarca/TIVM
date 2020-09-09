@@ -130,7 +130,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 
 	# ch1 vertical pos 
 	CImGui.SameLine()
-	CImGui.Button("Set CH1 Position       ") && begin
+	CImGui.Button("Set CH1 Offset") && begin
 		set_ch_position(scope, "CH1", scope_conf.CH1_Offset_new);
 		end
 	CImGui.SameLine()
@@ -149,7 +149,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt)
 
 	# ch2 vertical pos 
 	CImGui.SameLine()
-	CImGui.Button("Set CH2 Position       ") && begin
+	CImGui.Button("Set CH2 Offset") && begin
 		set_ch_position(scope, "CH2", scope_conf.CH2_Offset_new);
 		end
 	CImGui.SameLine()
