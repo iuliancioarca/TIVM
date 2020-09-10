@@ -6,8 +6,8 @@ function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0, r
         clear_color = Cfloat[0.45, 0.55, 0.60, 1.00]
 		fps = 200
 		refresh_cnt = 0
-		refresh_cnt_max = 100
-		base = 4
+		refresh_cnt_max = 50
+		base = 2
 		rev_state_dict = Dict("on"=>"off", "off"=>"on")
 		# instantiate instr objects
 		psu = PST3201(psu_handle)

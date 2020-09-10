@@ -1,7 +1,7 @@
 
 import GenericInstruments: query
 
-function connect!(address; mode=GI.VI_EXCLUSIVE_LOCK, timeout=GI.VI_TMO_INFINITE)
+function connect!(address; mode=GI.VI_NO_LOCK, timeout=UInt32(10))
 		# resource manager
 		rmg = GI.viOpenDefaultRM()
 		#Pointer for the instrument handle

@@ -90,10 +90,10 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 
 #	# Draw Acquire button
 	scope_conf.Acquire_btn, pressed = draw_toggle_button(scope_conf.Acquire_btn)
-	scope_conf.Acquire_btn.state && @async update_scope_conf!(scope_conf, scope, refresh_cnt, base)
+	scope_conf.Acquire_btn.state && update_scope_conf!(scope_conf, scope, refresh_cnt, base)
 #	# Draw Get meas button	
 	CImGui.SameLine()
-	CImGui.Button("Refresh measurements") && @async begin
+	CImGui.Button("Refresh measurements") && begin
 		scope_conf.Measurement_Value1 = get_meas_data(scope, "Meas_Nr1")
 		scope_conf.Measurement_Value2 = get_meas_data(scope, "Meas_Nr2")
 		scope_conf.Measurement_Value3 = get_meas_data(scope, "Meas_Nr3")
@@ -102,7 +102,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 	end
 #	# Draw Refresg settings button	
 	CImGui.SameLine()
-	CImGui.Button("Refresh settings") && @async begin
+	CImGui.Button("Refresh settings") && begin
 	 scope_conf.CH1_Volt_div = get_vertical_scale(scope, "CH1")
      scope_conf.CH2_Volt_div = get_vertical_scale(scope, "CH2")
      scope_conf.CH1_Offset = get_ch_position(scope, "CH1")
