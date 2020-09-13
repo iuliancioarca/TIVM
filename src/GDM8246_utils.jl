@@ -1,10 +1,10 @@
 
 function update_dmm_conf!(dmm_conf, dmm, refresh_cnt, base)    
     # measurements
-    refresh_cnt==base*1  && (dmm_conf.primary = get_primary_measurement(dmm, dmm_conf.crt_chan))
+    refresh_cnt==base*1  && (dmm_conf.primary = string(get_primary_measurement(dmm, dmm_conf.crt_chan)))
     refresh_cnt==base*5  && begin
     if dmm_conf.crt_func == "RIPPLE"
-        dmm_conf.secondary = get_secondary_measurement(dmm, dmm_conf.crt_chan)
+        dmm_conf.secondary = string(get_secondary_measurement(dmm, dmm_conf.crt_chan))
     else
         dmm_conf.secondary = "----.---"
     end

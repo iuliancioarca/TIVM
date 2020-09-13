@@ -88,10 +88,10 @@ end
 function get_primary_measurement(obj::GDM8246, ch)
 	ch = obj.instr_dict[ch]
 	cmd = ":VALue?"
-	value = strip(query(obj.handle, cmd))
+	value = parse(Float64, strip(query(obj.handle, cmd)))
 end
 function get_secondary_measurement(obj::GDM8246, ch)
 	ch = obj.instr_dict[ch]
 	cmd = ":SVALue?"
-	value = strip(query(obj.handle, cmd))
+	value = parse(Float64, strip(query(obj.handle, cmd)))
 end		       

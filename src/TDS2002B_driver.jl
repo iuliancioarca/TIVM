@@ -16,14 +16,16 @@ TDS2002B(handle) = TDS2002B(
                     "Source"=>"TRIGger:MAIn:EDGE:SOUrce",
                     "Level"=>"TRIGger:MAIn:LEVel",
                     "Mode"=>"TRIGger:MAIn:MODe",
+					"AUTO"=>"AUTO",
+					"NORMAL"=>"NORMAL",
                     "Meas_ch"=>"SOUrce?",
                     "Meas_type"=>"TYPe?",
                     "Meas_value"=>"VALue?",
-                    "Meas_Nr1"=>1,
-                    "Meas_Nr2"=>2,
-                    "Meas_Nr3"=>3,
-                    "Meas_Nr4"=>4,
-                    "Meas_Nr5"=>5,
+                    "MEAS1"=>1,
+                    "MEAS2"=>2,
+                    "MEAS3"=>3,
+                    "MEAS4"=>4,
+                    "MEAS5"=>5,
                     )
                     )
 
@@ -77,7 +79,7 @@ function get_meas_data(obj::TDS2002B, Meas_Nr1)
     #cmd = "*OPC?"
     #value = strip(query(obj.handle, cmd))
     cmd = "MEASUrement:MEAS$nr:VALUE?"
-    value = strip(query(obj.handle, cmd))
+    value = parse(Float64, strip(query(obj.handle, cmd)))
 end
 
 # set OSC settings low access functions
@@ -104,6 +106,7 @@ function set_trig_level(obj::TDS2002B, level)
 end
 
 function set_trig_mode(obj::TDS2002B, mode)
+	mode = obj.instr_dict[mode]
     cmd = "TRIGger:MAIn:MODe $mode"            # AUTO or NORMal
     write(obj.handle, cmd)
 end
@@ -134,7 +137,11 @@ function conf_acq_ch(obj::TDS2002B, ch)
 	write(obj.handle, "CURVE?")
 end
 
-
+function auto_set(obj::TDS2002B)
+	write(obj.handle, "AUTOSet EXECute")
+	@info "Scope auto-set in progress"
+	sleep(1)
+end
 
 function Trigger_Aquistion(obj::TDS2002B, ch)
 	ch = obj.instr_dict[ch]

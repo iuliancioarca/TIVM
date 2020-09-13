@@ -2,7 +2,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 	CImGui.Begin("TDS2002B Scope")
 	# hack for dropdowns until we implementd dicts
 	channels = ["CH1" , "CH2"]
-	modes = ["NORMal", "AUTO"]
+	modes = ["NORMAL", "AUTO"]
 	Measurement_Type =["FREQuency","MEAN","PERIod","PK2pk","CRMs","MINImum","MAXImum","RISe","FALL","PWIdth","NWIdth"]
 	
 	# DRAW DISPLAY INFO
@@ -90,19 +90,19 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 
 #	# Draw Acquire button
 	scope_conf.Acquire_btn, pressed = draw_toggle_button(scope_conf.Acquire_btn)
-	scope_conf.Acquire_btn.state && update_scope_conf!(scope_conf, scope, refresh_cnt, base)
+	scope_conf.Acquire_btn.state && @async update_scope_conf!(scope_conf, scope, refresh_cnt, base)
 #	# Draw Get meas button	
 	CImGui.SameLine()
-	CImGui.Button("Refresh measurements") && begin
-		scope_conf.Measurement_Value1 = get_meas_data(scope, "Meas_Nr1")
-		scope_conf.Measurement_Value2 = get_meas_data(scope, "Meas_Nr2")
-		scope_conf.Measurement_Value3 = get_meas_data(scope, "Meas_Nr3")
-		scope_conf.Measurement_Value4 = get_meas_data(scope, "Meas_Nr4")
-		scope_conf.Measurement_Value5 = get_meas_data(scope, "Meas_Nr5")		
+	CImGui.Button("Refresh measurements") && @async begin
+		scope_conf.Measurement_Value1 = get_meas_data(scope, "MEAS1")
+		scope_conf.Measurement_Value2 = get_meas_data(scope, "MEAS2")
+		scope_conf.Measurement_Value3 = get_meas_data(scope, "MEAS3")
+		scope_conf.Measurement_Value4 = get_meas_data(scope, "MEAS4")
+		scope_conf.Measurement_Value5 = get_meas_data(scope, "MEAS5")		
 	end
 #	# Draw Refresg settings button	
 	CImGui.SameLine()
-	CImGui.Button("Refresh settings") && begin
+	CImGui.Button("Refresh settings") && @async begin
 	 scope_conf.CH1_Volt_div = get_vertical_scale(scope, "CH1")
      scope_conf.CH2_Volt_div = get_vertical_scale(scope, "CH2")
      scope_conf.CH1_Offset = get_ch_position(scope, "CH1")
@@ -196,13 +196,13 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 	## Draw INPUT BOX
 	CImGui.PushItemWidth(150)
 	mod_selector = @cstatic mod_selector=Cint(0) begin
-		@c CImGui.Combo("TMode", &mod_selector, "NORMal\0AUTO\0\0")
+		@c CImGui.Combo("TMode", &mod_selector, "NORMAL\0AUTO\0\0")
 	end
 	scope_conf.Trigger_mode_new = modes[mod_selector+1]
 	
 	# Measurement 1; 
 	CImGui.Button("Set Meas 1 ") && begin
-	set_meas(scope,  "Meas_Nr1" , scope_conf.Measurement_source1, scope_conf.Measurement_Type1 );
+	set_meas(scope,  "MEAS1" , scope_conf.Measurement_source1, scope_conf.Measurement_Type1 );
     end
 	CImGui.SameLine()
 	## Draw INPUT BOX
@@ -218,12 +218,12 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 	end
 	scope_conf.Measurement_Type1 = Measurement_Type[Measurement_Type1+1]
 	CImGui.SameLine()
-	draw_scope_info( "  Meas1:",scope_conf.Measurement_Value1 )
+	draw_scope_info( "  Meas1:",string(scope_conf.Measurement_Value1) )
 
 
 	# Measurement 2; 
 	CImGui.Button("Set Meas 2 ") && begin
-	set_meas(scope,  "Meas_Nr2" , scope_conf.Measurement_source2, scope_conf.Measurement_Type2 );
+	set_meas(scope,  "MEAS2" , scope_conf.Measurement_source2, scope_conf.Measurement_Type2 );
 	end
 	CImGui.SameLine()
 	## Draw INPUT BOX
@@ -239,11 +239,11 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 	end
 	scope_conf.Measurement_Type2 = Measurement_Type[Measurement_Type2+1]
 	CImGui.SameLine()
-	draw_scope_info( "  Meas2:",scope_conf.Measurement_Value2 )
+	draw_scope_info( "  Meas2:",string(scope_conf.Measurement_Value2) )
 
 	# Measurement 3; 
 	CImGui.Button("Set Meas 3 ") && begin
-	set_meas(scope,  "Meas_Nr3" , scope_conf.Measurement_source3, scope_conf.Measurement_Type3 );
+	set_meas(scope,  "MEAS3" , scope_conf.Measurement_source3, scope_conf.Measurement_Type3 );
 	end
 	CImGui.SameLine()
 	## Draw INPUT BOX
@@ -259,12 +259,12 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 	end
 	scope_conf.Measurement_Type3 = Measurement_Type[Measurement_Type3+1]
 	CImGui.SameLine()
-	draw_scope_info( "  Meas3:",scope_conf.Measurement_Value3 )
+	draw_scope_info( "  Meas3:",string(scope_conf.Measurement_Value3) )
 
 
 	# Measurement 4; 
 	CImGui.Button("Set Meas 4 ") && begin
-	set_meas(scope,  "Meas_Nr4" , scope_conf.Measurement_source4, scope_conf.Measurement_Type4 );
+	set_meas(scope,  "MEAS4" , scope_conf.Measurement_source4, scope_conf.Measurement_Type4 );
 	end
 	CImGui.SameLine()
 	## Draw INPUT BOX
@@ -280,12 +280,12 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 	end
 	scope_conf.Measurement_Type4 = Measurement_Type[Measurement_Type4+1]
 	CImGui.SameLine()
-	draw_scope_info( "  Meas4:",scope_conf.Measurement_Value4 )
+	draw_scope_info( "  Meas4:",string(scope_conf.Measurement_Value4) )
 
 
 	# Measurement 5 
 	CImGui.Button("Set Meas 5 ") && begin
-	set_meas(scope,  "Meas_Nr5" , scope_conf.Measurement_source5, scope_conf.Measurement_Type5 );
+	set_meas(scope,  "MEAS5" , scope_conf.Measurement_source5, scope_conf.Measurement_Type5 );
 	end
 	CImGui.SameLine()
 	## Draw INPUT BOX
@@ -301,7 +301,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 	end
 	scope_conf.Measurement_Type5 = Measurement_Type[Measurement_Type5+1]
 	CImGui.SameLine()
-	draw_scope_info( "  Meas5:",scope_conf.Measurement_Value5 )
+	draw_scope_info( "  Meas5:",string(scope_conf.Measurement_Value5) )
 
 
 
