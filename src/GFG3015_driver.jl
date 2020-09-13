@@ -94,7 +94,7 @@ function get_amplit(obj::GFG3015, ch)
 	# get_amplit(fgen, "C1")
 	ch = obj.instr_dict[ch]
 	cmd = ":AMPLitude:VOLTage?"
-	value = strip(query(obj.handle, cmd))
+	value = parse(Float64, strip(query(obj.handle, cmd)))
 end
 
 # OFFSET
@@ -108,7 +108,7 @@ function get_offs(obj::GFG3015, ch)
 	# get_offs(fgen, "C1")
 	ch = obj.instr_dict[ch]
 	cmd = ":OFFSet?"
-	value = strip(query(obj.handle, cmd))
+	value = parse(Float64, strip(query(obj.handle, cmd)))
 end
 
 # FREQUENCY
@@ -122,7 +122,7 @@ function get_freq(obj::GFG3015, ch)
 	# get_freq(fgen, "C1")
 	ch = obj.instr_dict[ch]
 	cmd = ":FREQuency?"
-	value = strip(query(obj.handle, cmd))
+	value = parse(Float64, strip(query(obj.handle, cmd)))
 end
 
 # DUTY CYCLE
@@ -136,5 +136,5 @@ function get_duty(obj::GFG3015, ch)
 	# get_duty(fgen, "C1")
 	ch = obj.instr_dict[ch]
 	cmd = ":DUTY?"
-	value = strip(query(obj.handle, cmd))
+	value = parse(Float64, strip(query(obj.handle, cmd)))
 end

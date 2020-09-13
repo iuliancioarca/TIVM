@@ -49,18 +49,18 @@ get_idn(obj::TDS2002B) = query(obj.handle, "*IDN?")
 function get_vertical_scale(obj::TDS2002B, ch)
     ch = obj.instr_dict[ch]
     cmd = "$ch:SCAle?"
-    value = strip(query(obj.handle, cmd))
+    value = parse(Float64, strip(query(obj.handle, cmd)))
 end
 
 function get_horizontal_scale(obj::TDS2002B, time)
     time = obj.instr_dict[time]
     cmd = "$time?"
-    value = strip(query(obj.handle, cmd))
+    value = parse(Float64, strip(query(obj.handle, cmd)))
 end
 
 function get_ch_position(obj::TDS2002B, ch)
     cmd = "$ch:POSition?"
-    value = strip(query(obj.handle, cmd))
+    value = parse(Float64, strip(query(obj.handle, cmd)))
 end
 
 function set_ch_position(obj::TDS2002B, ch, lev)
