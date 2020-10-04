@@ -45,7 +45,7 @@ include("relays_gui.jl")
 include("main_gui.jl")
 
 # export utils
-export connect!, disconnect!, write, read, viWrite, viRead, query, start_gui
+export connect!, disconnect!, write, read, viWrite, viRead, query, start_gui, visaRead, visaWrite, find_resources
 
 # export dmm functions
 export get_sense_func, set_sense_func, set_sense_range, get_sense_range, set_sense_range_auto, get_sense_range_auto,

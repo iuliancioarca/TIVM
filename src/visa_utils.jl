@@ -33,3 +33,51 @@ function query(handle, cmd::String, delay::Real=0.0)
 	return x
 end
 
+# aliases
+function visaWrite(handle, cmd)
+	write(handle, cmd)
+end
+
+function visaWrite(address::String, cmd)
+	handle = connect!(address)
+	write(handle, cmd)
+	disconnect!(handle)
+end
+
+function visaRead(handle, bufSize::UInt32=0x00000100)
+	read(handle, bufSize)
+end
+
+function visaRead(address::String, bufSize::UInt32=0x00000100)
+	handle = connect!(address)
+	ro = read(handle, bufSize)
+	disconnect!(handle)
+	return ro
+end
+
+function query(address::String, cmd::String)
+	handle = connect!(address)
+	ro = ""
+	try
+		ro = query(handle, cmd)
+	catch
+		ro = query(handle, cmd)
+	end
+	disconnect!(handle)
+	return ro
+end
+
+
+# Helper functions to find instruments
+function find_resources(expr::AbstractString="?*::INSTR")
+	resmgr = GenericInstruments.viOpenDefaultRM()
+	addresses = GenericInstruments.viFindRsrc(resmgr, expr)
+	for address in addresses
+		try
+			instr_name = query(address::String, "*IDN?")		
+			println("Found $instr_name on address: $address")
+		catch
+			nothing
+		end
+	end
+end
