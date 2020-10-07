@@ -291,7 +291,7 @@ function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
 	## Draw INPUT BOX
 	CImGui.PushItemWidth(50)
 	ch_selector5 = @cstatic ch_selector5=Cint(0) begin
-		@c CImGui.Combo("C3", &ch_selector5, "CH1\0CH2\0")
+		@c CImGui.Combo("C5", &ch_selector5, "CH1\0CH2\0")
 	end
 	scope_conf.Measurement_source5 = channels[ch_selector5+1]
 	CImGui.SameLine()
