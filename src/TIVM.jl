@@ -35,6 +35,10 @@ include("GFG3015_utils.jl")
 # TDS2002B
 include("TDS2002B_driver.jl")
 include("TDS2002B_utils.jl")
+
+# Relays
+include("Relays_driver.jl")
+
 # GUI
 include("gui_utils.jl")
 include("psu_gui.jl")
@@ -65,3 +69,6 @@ export get_vertical_scale, get_horizontal_scale, get_ch_position, set_ch_positio
 	set_meas, conf_acq_ch, Trigger_Aquistion
 
 end
+
+# export relays functions
+export set_state, get_state, get_idn

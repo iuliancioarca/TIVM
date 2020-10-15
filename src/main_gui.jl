@@ -14,7 +14,7 @@ function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0, r
 		dmm = GDM8246(dmm_handle)
 		fgen = GFG3015(fgen_handle)
 		scope = TDS2002B(scope_handle)      #Daniel
-		relays = relays_handle
+		relays = Relays(relays_handle)
 		# instantiate gui conf objects
 		psu_conf = PST3201Conf()
 		dmm_conf = GDM8246Conf()
