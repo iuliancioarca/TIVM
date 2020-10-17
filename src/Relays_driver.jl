@@ -50,6 +50,6 @@ end
 function get_state(obj::Relays, ch)
 	ch = obj.instr_dict[ch]
 	cmd = ":SET:PIN$ch?"
-	query(obj.handle, cmd)
+	st = query(obj.handle, cmd)
 	st = obj.instr_dict[st]
 end
