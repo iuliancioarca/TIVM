@@ -58,7 +58,7 @@ function set_sense_func(obj::GDM8246, ch, fct)
 	ch = obj.instr_dict[ch]
 	obj.fct = fct
 	fct = obj.instr_dict[fct]
-	cmd = ":CONFigure:$fct $(obj.range)"
+	cmd = ":CONFigure:$fct"
 	write(obj.handle, cmd)
 end
 function set_sense_range(obj::GDM8246, ch, vrang) # this will not work
