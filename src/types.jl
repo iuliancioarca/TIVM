@@ -199,14 +199,14 @@ mutable struct RelaysConf
 end
 # Outer constructor
 RelaysConf() = RelaysConf(false,
-					CImGuiToggleButton("ON ##C1", "OFF##C1"),
-					CImGuiToggleButton("ON ##C2", "OFF##C2"),
-					CImGuiToggleButton("ON ##C3", "OFF##C3"),
-					CImGuiToggleButton("ON ##C4", "OFF##C4"),
-					CImGuiToggleButton("ON ##C5", "OFF##C5"),
-					CImGuiToggleButton("ON ##C6", "OFF##C6"),
-					CImGuiToggleButton("ON ##C7", "OFF##C7"),
-					CImGuiToggleButton("ON ##C8", "OFF##C8"),
-					CImGuiToggleButton("ON ##C9", "OFF##C9"),
+					CImGuiToggleButton("C1 ##C1", "C1 ##C1"),
+					CImGuiToggleButton("C2 ##C2", "C2 ##C2"),
+					CImGuiToggleButton("C3 ##C3", "C3 ##C3"),
+					CImGuiToggleButton("C4 ##C4", "C4 ##C4"),
+					CImGuiToggleButton("C5 ##C5", "C5 ##C5"),
+					CImGuiToggleButton("C6 ##C6", "C6 ##C6"),
+					CImGuiToggleButton("C7 ##C7", "C7 ##C7"),
+					CImGuiToggleButton("C8 ##C8", "C8 ##C8"),
+					CImGuiToggleButton("C9 ##C9", "C9 ##C9"),
 					CImGuiToggleButton("ON ##Refresh", "OFF##Refresh")
 					)

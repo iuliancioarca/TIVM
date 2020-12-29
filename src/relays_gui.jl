@@ -50,18 +50,34 @@ function ShowRelaysWindow(relays, relays_conf, refresh_cnt, base)
 	
 	CImGui.Text("Refresh")
 	CImGui.SameLine()
-	relays_conf.Refresh, pressed = draw_toggle_button(relays_conf.Refresh)
-	pressed && @async begin
+	#relays_conf.Refresh, pressed = draw_toggle_button(relays_conf.Refresh)
+	CImGui.Button("Refresh") && @async begin
+	#relays_conf.Refresh.state  && @async begin
+			sleep(0.25)
 			relays_conf.C1.state = rev_state_dict[get_state(relays, "C1")]
+			sleep(0.25)
 			relays_conf.C2.state = rev_state_dict[get_state(relays, "C2")]
+			sleep(0.25)
 			relays_conf.C3.state = rev_state_dict[get_state(relays, "C3")]
+			sleep(0.25)
 			relays_conf.C4.state = rev_state_dict[get_state(relays, "C4")]
+			sleep(0.25)
 			relays_conf.C5.state = rev_state_dict[get_state(relays, "C5")]
+			sleep(0.25)
 			relays_conf.C6.state = rev_state_dict[get_state(relays, "C6")]
+			sleep(0.25)
 			relays_conf.C7.state = rev_state_dict[get_state(relays, "C7")]
+			sleep(0.25)
 			relays_conf.C8.state = rev_state_dict[get_state(relays, "C8")]
+			sleep(0.25)
 			relays_conf.C9.state = rev_state_dict[get_state(relays, "C9")]
+			sleep(0.25)
 		end
+	CImGui.Text("All OFF")
+	CImGui.SameLine()
+	CImGui.Button("All OFF") && @async begin		
+		all_off(relays)
+	end
 	CImGui.End()
 	return relays_conf
 end

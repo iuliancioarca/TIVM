@@ -53,3 +53,11 @@ function get_state(obj::Relays, ch)
 	st = query(obj.handle, cmd)
 	st = obj.instr_dict[st]
 end
+
+
+function all_off(obj::Relays)
+	for i=1:9
+		set_state(obj, "C$i", "off")
+		sleep(0.25)
+	end
+end

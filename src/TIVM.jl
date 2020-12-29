@@ -69,7 +69,7 @@ export get_vertical_scale, get_horizontal_scale, get_ch_position, set_ch_positio
 	set_meas, conf_acq_ch, Trigger_Aquistion
 
 # export relays functions
-export set_state, get_state, get_idn
+export set_state, get_state, get_idn, all_off
 
 end
 
