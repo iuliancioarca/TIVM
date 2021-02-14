@@ -63,7 +63,7 @@ end
 
 
 function all_off(obj::Relays)
-	for i=1:9
+	for i=1:16
 		set_state(obj, "C$i", "off")
 		sleep(0.25)
 	end
