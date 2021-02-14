@@ -1,4 +1,4 @@
-mutable struct CImGuiToggleButton	
+mutable struct CImGuiToggleButton
     on_name
 	off_name
 	name
@@ -103,7 +103,7 @@ GFG3015Conf() = GFG3015Conf(false, "1", "C1", "na", 0.0, "Vpp", "na","na","na","
 					)
 
 
-#scope 
+#scope
 mutable struct TDS2002BConf
 	active
 	CH1_Volt_div
@@ -145,10 +145,10 @@ mutable struct TDS2002BConf
 	end
 					# Outer constructor
 	TDS2002BConf() = TDS2002BConf(false,
-				"1.00", 
-				"0.00", 
 				"1.00",
-				"0.00", 
+				"0.00",
+				"1.00",
+				"0.00",
 				"0.001",    #in seconds
 				"CH1",
 				"01.00",
@@ -158,7 +158,7 @@ mutable struct TDS2002BConf
 				00.00,   #CH2_Volt_div_new
 				00.00,   #CH2_Offset_new
 				00.000,    #Time_div_new
-				"CH1",   
+				"CH1",
 				00.00,
 				"AUTO" ,
 				"off",
@@ -195,6 +195,13 @@ mutable struct RelaysConf
 	C7
 	C8
 	C9
+    C10
+    C11
+    C12
+    C13
+    C14
+    C15
+    C16
 	Refresh
 end
 # Outer constructor
