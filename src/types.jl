@@ -215,5 +215,12 @@ RelaysConf() = RelaysConf(false,
 					CImGuiToggleButton("C7 ##C7", "C7 ##C7"),
 					CImGuiToggleButton("C8 ##C8", "C8 ##C8"),
 					CImGuiToggleButton("C9 ##C9", "C9 ##C9"),
+                    CImGuiToggleButton("C10 ##C10", "C10 ##C10"),
+                    CImGuiToggleButton("C11 ##C11", "C11 ##C11"),
+                    CImGuiToggleButton("C12 ##C12", "C11 ##C12"),
+                    CImGuiToggleButton("C13 ##C13", "C11 ##C13"),
+                    CImGuiToggleButton("C14 ##C14", "C11 ##C14"),
+                    CImGuiToggleButton("C15 ##C15", "C11 ##C15"),
+                    CImGuiToggleButton("C16 ##C16", "C11 ##C16"),
 					CImGuiToggleButton("ON ##Refresh", "OFF##Refresh")
 					)
