@@ -72,6 +72,9 @@ end
 function set_ch_coupling(obj::TDS2002B, ch, cpl)
 	write(obj.handle, "$ch:COUPling $cpl")
 end
+function get_ch_coupling(obj::TDS2002B, ch)
+	strip(query(obj.handle, "$ch:COUPling?"))
+end
 
 function get_trig_data(obj::TDS2002B, trig)
     trig = obj.instr_dict[trig]
