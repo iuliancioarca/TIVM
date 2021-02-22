@@ -68,6 +68,11 @@ function set_ch_position(obj::TDS2002B, ch, lev)
     value = write(obj.handle, cmd)
 end
 
+# Channel coupling
+function set_ch_coupling(obj::TDS2002B, ch, cpl)
+	write(obj.handle, "$ch:COUPling $cpl")
+end
+
 function get_trig_data(obj::TDS2002B, trig)
     trig = obj.instr_dict[trig]
     cmd = "$trig?"
