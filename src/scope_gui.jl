@@ -1,5 +1,5 @@
 function ShowSCOPEWindow(scope, scope_conf, rev_state_dict, refresh_cnt, base)
-	CImGui.Begin("TDS2002B Scope")
+	CImGui.Begin("Scope")
 	# hack for dropdowns until we implementd dicts
 	channels = ["CH1" , "CH2"]
 	modes = ["NORMAL", "AUTO"]
