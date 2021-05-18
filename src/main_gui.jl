@@ -1,5 +1,5 @@
 
-function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0, relays_handle=0) #use keyword arguments
+function start_gui(;psu=PST3201(0), dmm=GDM8246(0), fgen=GFG3015(0), scope=TDS2002B(0), relays=Relays(0)) #use keyword arguments
 	window, ctx = init_gui()
     # Main while loop
     try
@@ -9,12 +9,6 @@ function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0, r
 		refresh_cnt_max = 52
 		base = 2
 		rev_state_dict = Dict("on"=>"off", "off"=>"on")
-		# instantiate instr objects
-		psu = PST3201(psu_handle)
-		dmm = GDM8246(dmm_handle)
-		fgen = GFG3015(fgen_handle)
-		scope = TDS2002B(scope_handle)      #Daniel
-		relays = Relays(relays_handle)
 		# instantiate gui conf objects
 		psu_conf = PST3201Conf()
 		dmm_conf = GDM8246Conf()
@@ -24,16 +18,16 @@ function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0, r
         while !GLFW.WindowShouldClose(window)
 			refresh_cnt == refresh_cnt_max && (refresh_cnt=0)
 			refresh_cnt = refresh_cnt + 1
-			
+
 			GLFW.PollEvents()
 			# start the Dear ImGui frame
 			ImGui_ImplOpenGL3_NewFrame()
 			ImGui_ImplGlfw_NewFrame()
 			CImGui.NewFrame()
-			
+
 			# Display checkboxes for activating instrument front panels
-			psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf = ShowMenuWindow(psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf)		#Daniel		
-					
+			psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf = ShowMenuWindow(psu_conf, dmm_conf, fgen_conf, scope_conf, relays_conf)		#Daniel
+
 			# DISPLAY INSTRUMENTS FRONT PANELS
 			psu_conf.active && (psu_conf = ShowPSUWindow(psu, psu_conf, rev_state_dict, refresh_cnt, base))
 			dmm_conf.active && (dmm_conf = ShowDMMWindow(dmm, dmm_conf, rev_state_dict, refresh_cnt, base))
@@ -47,6 +41,6 @@ function start_gui(;psu_handle=0, dmm_handle=0, fgen_handle=0, scope_handle=0, r
         @error "Error in renderloop!" exception=e
         Base.show_backtrace(stderr, catch_backtrace())
     finally
-        destroy_gui(ctx,window)       
+        destroy_gui(ctx,window)
     end
 end
