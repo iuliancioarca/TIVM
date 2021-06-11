@@ -10,6 +10,8 @@ using CImGui.OpenGLBackend
 using CImGui.GLFWBackend.GLFW
 using CImGui.OpenGLBackend.ModernGL
 using ImPlot
+using Statistics
+using FFTW
 import CImGui.LibCImGui: ImGuiCond_Always, ImGuiCond_Once
 
 const GI = GenericInstruments
@@ -36,6 +38,9 @@ include("GFG3015_utils.jl")
 include("TDS2002B_driver.jl")
 include("TDS2002B_utils.jl")
 
+# DS1000Z scope
+include("DS1000Z_driver.jl")
+
 # Relays
 include("Relays_driver.jl")
 
@@ -47,6 +52,12 @@ include("fgen_gui.jl")
 include("scope_gui.jl")
 include("relays_gui.jl")
 include("main_gui.jl")
+
+# ADALM2000
+const jllibm2k = joinpath(@__DIR__, "jllibm2k.dll")
+include("ADALM2000/jllibm2k_api.jl")
+include("ADALM2000/analog/m2kanalogin.jl")
+include("ADALM2000/analog/m2kanalogout.jl")
 
 # export utils
 export connect!, disconnect!, write, read, viWrite, viRead, query, start_gui, visaRead, visaWrite, find_resources
@@ -64,7 +75,7 @@ export 	set_wfm, get_wfm, set_amplit_unit, get_amplit_unit, set_amplit, get_ampl
 	get_freq, set_duty, get_duty
 
 # export scope functions	
-export get_vertical_scale, get_horizontal_scale, get_ch_position, set_ch_position, get_trig_data, get_meas_data, 
+export get_vertical_scale, get_horizontal_scale, get_ch_position, set_ch_position, set_vertical_offset, get_trig_data, get_meas_data, 
 	set_vertical_scale, set_horizontal_scale, set_trig_ch, set_trig_level, set_trig_mode, set_meas_ch, set_meas_type,
 	set_meas, conf_acq_ch, Trigger_Aquistion
 
