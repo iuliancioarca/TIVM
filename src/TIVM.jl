@@ -54,10 +54,10 @@ include("relays_gui.jl")
 include("main_gui.jl")
 
 # ADALM2000
-const jllibm2k = joinpath(@__DIR__, "jllibm2k.dll")
-include("ADALM2000/jllibm2k_api.jl")
-include("ADALM2000/analog/m2kanalogin.jl")
-include("ADALM2000/analog/m2kanalogout.jl")
+#const jllibm2k = joinpath(@__DIR__, "jllibm2k.dll")
+#include("ADALM2000/jllibm2k_api.jl")
+#include("ADALM2000/analog/m2kanalogin.jl")
+#include("ADALM2000/analog/m2kanalogout.jl")
 
 # export utils
 export connect!, disconnect!, write, read, viWrite, viRead, query, start_gui, visaRead, visaWrite, find_resources
