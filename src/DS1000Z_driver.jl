@@ -110,7 +110,7 @@ function set_trig_mode(obj::DS1000Z, mode)
     write(obj.handle, cmd)
 end
 
-function get_trig_data(obj::DS1000Z, trig)
+function get_trig_data(obj::DS1000Z, trig) #???
     trig = obj.instr_dict[trig]
     cmd = "$trig?"
     value = strip(query(obj.handle, cmd))
@@ -147,9 +147,10 @@ end
 # select channel for acq and config
 function conf_acq_ch(obj::DS1000Z, ch)
 	ch = obj.instr_dict[ch]
-    write(obj.handle, "SELect:$ch ON")
-	write(obj.handle, "DATa:SOUrce $ch;DATa:ENCdg SRIBINARY;DATa:WIDth 1;DATa:STARt 1;DATa:STOP 2500")
-	write(obj.handle, "CURVE?")
+    write(obj.handle, ":WAVeform:SOURce CHANnel$ch")
+	write(obj.handle, ":WAVeform:MODE NORMal")
+	write(obj.handle, ":WAVeform:FORMat BYTE") #WORD|BYTE|ASCii} 225
+	write(obj.handle, ":WAVeform:DATA?")
 end
 
 function auto_set(obj::DS1000Z)
@@ -161,15 +162,21 @@ end
 function Trigger_Aquistion(obj::DS1000Z, ch)
 	ch = obj.instr_dict[ch]
 
-	y_buffer = zeros(UInt8, 2506)
+
+	TMCdatadescription = zeros(UInt8, 11)
+	viRead!(obj.handle, TMCdatadescription)
+	effectivebytes = TMCdatadescription[8:11]
+	
+	y_buffer = zeros(UInt8, effectivebytes)
 	viRead!(obj.handle, y_buffer)
 
-	gain = parse(Float64, query(obj.handle, "WFMPre:YMUlt?"))
-	#offs = parse(Float64, query(obj.handle, "WFMPre:YOFf?")) # THIS IS A PIECE OF SHIT COMMAND!!!!
-	offs = parse(Float64, query(obj.handle, "$ch:POSition?"))
-	dt = parse(Float64, query(obj.handle, "WFMPre:XINcr?"))
+	YINCrement = parse(Float64, query(obj.handle, ":WAVeform:YINCrement?"))
+	YORigin = parse(Float64, query(obj.handle, ":WAVeform:YORigin?"))
+    YREFerence = parse(Float64, query(obj.handle, ":WAVeform:YREFerence?"))
 
-	y = Float64.(reinterpret(Int8, y_buffer[7:end])) .* gain .- offs
+	dt = parse(Float64, query(obj.handle, ":WAVeform:XINCrement?"))
+
+	y = (Float64.(reinterpret(Int8, y_buffer)) .- YORigin .- YREFerence) .* YINCrement
 	t = collect(0:dt:dt*(length(y)-1))
 
 	return t, y
