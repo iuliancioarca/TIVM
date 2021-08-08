@@ -161,22 +161,20 @@ end
 
 function Trigger_Aquistion(obj::DS1000Z, ch)
 	ch = obj.instr_dict[ch]
-
-
 	TMCdatadescription = zeros(UInt8, 11)
 	viRead!(obj.handle, TMCdatadescription)
-	effectivebytes = TMCdatadescription[8:11]
-	
+	effectivebytes = parse(Int32, string(Char.(TMCdatadescription[8:11])...))
+
 	y_buffer = zeros(UInt8, effectivebytes)
 	viRead!(obj.handle, y_buffer)
 
 	YINCrement = parse(Float64, query(obj.handle, ":WAVeform:YINCrement?"))
 	YORigin = parse(Float64, query(obj.handle, ":WAVeform:YORigin?"))
-    YREFerence = parse(Float64, query(obj.handle, ":WAVeform:YREFerence?"))
+	YREFerence = parse(Float64, query(obj.handle, ":WAVeform:YREFerence?"))
 
 	dt = parse(Float64, query(obj.handle, ":WAVeform:XINCrement?"))
 
-	y = (Float64.(reinterpret(Int8, y_buffer)) .- YORigin .- YREFerence) .* YINCrement
+	y = (y_buffer .- YORigin .- YREFerence) .* YINCrement
 	t = collect(0:dt:dt*(length(y)-1))
 
 	return t, y
