@@ -24,11 +24,17 @@ DS1000Z(handle) = DS1000Z(
                     "MEAS3"=>3,
                     "MEAS4"=>4,
                     "MEAS5"=>5,
-					"MEAN"=>"VAVG",
-					"PERIod"=>"PERIod",
-					"PK2pk"=>"VPP",
-					"MINImum"=>"VMIN",
-					"MAXImum"=>"VMAX",
+		"MEAN"=>"VAVG",
+		"PERIod"=>"PERIod",
+		"PK2pk"=>"VPP",
+		"MINImum"=>"VMIN",
+		"MAXImum"=>"VMAX",
+		"CRMs" => "VRMS",
+		"FREQuency" => "FREQuency",
+		"RISe" => "RTIMe",
+		"FALL" => "FTIMe",
+		"PWIdth" => "PWIDth|",
+		"NWIdth" => "NWIDth|"
                     )
                     )
 
