@@ -31,8 +31,8 @@ catch
 end
 
 # START gui
-@async start_gui(psu_handle = psu_handle, dmm_handle = dmm_handle, fgen_handle = fgen_handle, 
-        scope_handle = scope_handle, relays_handle=relays_handle)
+@async start_gui(psu = psu, dmm = dmm, fgen = fgen, 
+        scope = scope, relays=relays)
 
 # disconnect
 #disconnect!(dmm_handle)
