@@ -34,12 +34,12 @@ include("GDM8246_utils.jl")
 include("GFG3015_driver.jl")
 include("GFG3015_utils.jl")
 
+# DS1000Z scope
+include("DS1000Z_driver.jl")
+
 # TDS2002B
 include("TDS2002B_driver.jl")
 include("TDS2002B_utils.jl")
-
-# DS1000Z scope
-include("DS1000Z_driver.jl")
 
 # Relays
 include("Relays_driver.jl")
