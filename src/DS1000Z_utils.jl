@@ -1,5 +1,4 @@
-
-function update_scope_conf!(scope_conf, scope::TDS2002B, refresh_cnt, base)	 
+function update_scope_conf!(scope_conf, scope::DS1000Z, refresh_cnt, base)	 
      # Get Channel Volt per Div 
      #refresh_cnt==base*1  && (scope_conf.CH1_Volt_div = string(get_vertical_scale(scope, "CH1")))
      #refresh_cnt==base*2 && (scope_conf.CH2_Volt_div = string(get_vertical_scale(scope, "CH2")))
@@ -20,10 +19,23 @@ function update_scope_conf!(scope_conf, scope::TDS2002B, refresh_cnt, base)
 	 
 	 # conf acq chan1 and acquire	 
 	 (refresh_cnt==base*1) && (conf_acq_ch(scope, "CH1"))
-	 (refresh_cnt==base*5) && ((scope_conf.t, scope_conf.y1) = Trigger_Aquistion(scope, "CH1"))
+	 (refresh_cnt==base*3) && ((scope_conf.t, scope_conf.y1) = Trigger_Aquistion(scope, "CH1"))
+
+	 (refresh_cnt==base*5) && (conf_acq_ch(scope, "CH2"))
+	 (refresh_cnt==base*7) && ((scope_conf.t, scope_conf.y2) = Trigger_Aquistion(scope, "CH2"))
+	 
+	 (refresh_cnt==base*9) && (conf_acq_ch(scope, "CH1"))
+	 (refresh_cnt==base*11) && ((scope_conf.t, scope_conf.y1) = Trigger_Aquistion(scope, "CH1"))
+	 	 
 	 
 	 # conf acq chan2 and acquire	 
-	 (refresh_cnt==base*10) && (conf_acq_ch(scope, "CH2"))
+	 (refresh_cnt==base*13) && (conf_acq_ch(scope, "CH2"))
 	 (refresh_cnt==base*15) && ((scope_conf.t, scope_conf.y2) = Trigger_Aquistion(scope, "CH2"))	 
+	 
+	 (refresh_cnt==base*17) && (conf_acq_ch(scope, "CH1"))
+	 (refresh_cnt==base*19) && ((scope_conf.t, scope_conf.y1) = Trigger_Aquistion(scope, "CH1"))
+
+	 (refresh_cnt==base*21) && (conf_acq_ch(scope, "CH2"))
+	 (refresh_cnt==base*23) && ((scope_conf.t, scope_conf.y2) = Trigger_Aquistion(scope, "CH2"))
 
 end

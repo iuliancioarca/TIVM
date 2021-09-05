@@ -36,6 +36,11 @@ include("GFG3015_utils.jl")
 
 # DS1000Z scope
 include("DS1000Z_driver.jl")
+include("DS1000Z_utils.jl")
+
+# DS1000Z fgen
+include("DS1000Z_FGEN_driver.jl")
+include("DS1000Z_FGEN_utils.jl")
 
 # TDS2002B
 include("TDS2002B_driver.jl")
