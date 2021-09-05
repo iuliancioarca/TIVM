@@ -58,7 +58,11 @@ function set_sense_func(obj::GDM8246, ch, fct)
 	ch = obj.instr_dict[ch]
 	obj.fct = fct
 	fct = obj.instr_dict[fct]
-	cmd = ":CONFigure:$fct $(obj.range)"
+	if obj.fct == "DIODE"
+		cmd = ":CONFigure:$fct"
+	else
+		cmd = ":CONFigure:$fct $(obj.range)"
+	end
 	write(obj.handle, cmd)
 end
 function set_sense_range(obj::GDM8246, ch, vrang) # this will not work
